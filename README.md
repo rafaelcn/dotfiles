@@ -27,6 +27,7 @@ __The list of the applications that are being installed when the script is runni
  - [x] Git (and github integration, generating ssh keys as well)
  - [x] Synaptic Package Manager
  - [ ] Adobe Flash Player
+ - [ ] GCC, G++ 4.9
  - [ ] Java 7, 8 (and the browser plugin as well)
 
 
