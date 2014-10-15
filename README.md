@@ -29,6 +29,7 @@ __The list of the applications that are being installed when the script is runni
  - [ ] Adobe Flash Player
  - [ ] PyEnvironment 
  - [ ] Python 3.3
+ - [ ] GCC, G++ 4.9
  - [ ] Java 7, 8 (and the browser plugin as well)
 
 
