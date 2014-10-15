@@ -4,32 +4,29 @@
 #: Author	: Rafael C. Nunes <rafaelnunes737@hotmail.com>
 #: License	: MIT
 #: Version	: 0.1
-#: Options	: -help
+#: Options	: -help, -install_jdk7, -install_jdk8.
 
+###################### Global variables #####################
 JVM=("/usr/lib/jvm")
 
-case $1 in
-	"-help") 
-	clear
-	echo "This script will make your life easier by installing almost everything that you need. if you have doubts about what will be installed checkout https://github.com/rafaelcn/Linux-setup to more information."
-	echo ""
-	exit;;
-esac
+#############################################################
 
 
-if [ $(id -u) -eq 0 ] 
+if [ $(id -u) -ne 0 ] 
 then
-	echo "This script must not be ran with root privileges!"		
+	echo "This script must be ran with root privileges! If you have any doubts about the proccess you can check the script for security reasons."		
 	exit
 fi
 
 # Installing dev and other user tools.
-echo "--- installing git ---"
+echo "--- INSTALLING Git ---"
 sudo apt-get install git -y -qq
-echo "--- installing mercurial ---"
+echo "--- INSTALLING Mercurial (HG) ---"
 sudo apt-get install mercurial -y -qq
-echo "--- installing synaptic package manager ---"
+echo "--- INSTALLING Synaptic package manager ---"
 sudo apt-get install synaptic -y -qq
+
+
 
 # TODO: Finish the java function.
 # Configuring Java environment. Java has to be one of the last things to be 
@@ -37,7 +34,7 @@ sudo apt-get install synaptic -y -qq
 install_java()
 {
 	clear
-	echo "--- configuring java environment ---"
+	echo "--- Configuring java environment | Installing ($1) ---"
 
 	#testing /usr/lib/jvm for Java installation
 	if [ -d "/usr/lib/jvm" ] 
@@ -50,7 +47,14 @@ install_java()
 	fi
 }
 
-
-#install_java
-
 echo "System configuration complete."
+
+case $1 in
+	"-help") 
+	clear
+	echo "This script will make your life easier by installing almost everything that you need. if you have doubts about what will be installed checkout https://github.com/rafaelcn/Linux-setup to more information."
+	echo ""
+	exit;;
+	"-jdk7") install_java jdk7;;
+	"-jdk8") install_java jdk8;;
+esac
