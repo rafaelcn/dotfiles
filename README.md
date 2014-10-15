@@ -24,9 +24,11 @@ Applications
 __The list of the applications that are being installed when the script is running__
 
  - [x] HG (Mercurial)
- - [x] Git (and github integration, generating ssh keys as well)
+ - [x] Git (and github integration, generating ssh keys as well, although it's not generating any keys yet)
  - [x] Synaptic Package Manager
  - [ ] Adobe Flash Player
+ - [ ] PyEnvironment 
+ - [ ] Python 3.3
  - [ ] Java 7, 8 (and the browser plugin as well)
 
 
