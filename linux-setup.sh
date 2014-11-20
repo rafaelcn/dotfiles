@@ -6,12 +6,6 @@
 #: Version	: 0.1
 #: Options	: -help, -jdk8 (not available yet).
 
-#############################################################
-# 
-# 
-#
-#############################################################
-
 ###################### Global variables ############################
 
 # The architecture of the linux being executed (none by default).
@@ -64,7 +58,7 @@ install_default()
 	echo "--- INSTALLING Synaptic package manager ---"
 	sudo apt-get install synaptic -y -qq
 	echo "Synaptic located on: " $(which synaptic)
-
+	echo "--- INSTALLING GCC 4.9 ---"
 	install_gcc	
 	
 	echo "--- INSTALLING Ruby"
@@ -80,7 +74,6 @@ install_default()
 # Installs the latest stable gcc available (GCC 4.9)
 install_gcc()
 {
-	echo "--- INSTALLING GCC 4.9 ---"
 	download_file g++-4.9 http://gcc.parentingamerica.com/releases/gcc-4.9.2/gcc-4.9.2.tar.gz
 }
 
