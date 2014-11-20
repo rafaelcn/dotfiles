@@ -21,7 +21,7 @@ __That's it, *simple* as that. Now go and setup your linux environment ;)__
 Applications
 ===
 
-__The list of the applications that are being installed when the script is running__
+__The list of the applications that will be installed when the script is run__
 
  - [x] HG (Mercurial)
  - [x] Git (and github integration, generating ssh keys as well, although it's not generating any keys yet)
