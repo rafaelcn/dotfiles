@@ -4,7 +4,7 @@
 #: Author	: Rafael C. Nunes <rafaelnunes737@hotmail.com>
 #: License	: MIT
 #: Version	: 0.1
-#: Options	: -help, -jdk8 (not available yet).
+#: Options	: -help.
 
 ###################### Global variables ############################
 
@@ -41,12 +41,104 @@ download_file()
 	curl -# -o $1 $2
 }
 
+# Installs the latest stable gcc available (GCC 4.9)
+install_gcc()
+{
+    #TODO: Extract file  and install
+    download_file g++-4.9 http://gcc.parentingamerica.com/releases/gcc-4.9.2/gcc-4.9.2.tar.gz
+    tar xvfJ g++-4.9
+}
+
+create_folders()
+{
+    # My $HOME folder structure:
+    # 
+    # $HOME
+    #   |
+    #   --- Github
+    #   |
+    #   --- HG  
+    #   |
+    #   --- SVN
+    #   |
+    #   --- Databases
+    #   |  
+    #   --- py-env
+    #   |
+    #   --- Math
+    #   |
+    #   --- IDEs 
+    #   |
+    #   --- Programming
+    #   |
+    #   --- Web-Programming
+
+    if [ -d "$HOME/Github" ] 
+    then
+	echo "\"Github\" folder already exists, skipping..."
+	sleep 1
+    else
+	mkdir $HOME/Github
+	echo ""
+    fi
+
+    if [ -d "$HOME/HG" ] 
+    then
+	echo "\"Mercurial (HG)\" folder already exists, skipping..."
+	sleep 1
+    else
+	mkdir $HOME/HG
+	echo ""
+    fi
+    
+    if [ -d "$HOME/SVN" ] 
+    then
+	echo "\"SVN\" folder already exists, skipping..."
+	sleep 1
+    else
+	mkdir $HOME/SVN
+	echo ""
+    fi
+
+    if [ -d "$HOME/Databases" ] 
+    then
+	echo "\"Databases\" folder already exists, skipping..."
+	sleep 1
+    else
+	mkdir $HOME/Github
+	echo ""
+    fi
+   
+    if [ -d "$HOME/IDEs" ] 
+    then
+	echo "\"IDEs\" folder already exists, skipping..."
+	sleep 1
+    else
+	mkdir $HOME/IDEs
+	echo ""
+    fi
+
+    if [ -d "$HOME/Web-Programming" ] 
+    then
+	echo "\"Web-Programming\" folder already exists, skipping..."
+	sleep 1
+    else
+	mkdir $HOME/Web-Programming
+	echo ""
+    fi
+
+}
+
 install_default() 
 {
 	echo ""
 	echo "System architecture: $LINUX_ARCH."
 	echo ""
-	sleep 3
+	sleep 2
+
+	# My linux $HOME path has some additional folders
+	echo "Creating necessary folders..."
+	create_folders
 
 	# Installing dev and other user tools.
 	echo "--- INSTALLING Git ---"
@@ -58,76 +150,26 @@ install_default()
 	echo "--- INSTALLING Synaptic package manager ---"
 	sudo apt-get install synaptic -y -qq
 	echo "Synaptic located on: " $(which synaptic)
-	echo "--- INSTALLING GCC 4.9 ---"
-	install_gcc	
-	
 	echo "--- INSTALLING Ruby"
 	apt-get install ruby -y -qq
-	which ruby
+	echo "Ruby located on: " $(which ruby)
 
-	# By default, the jdk that will be installed is JDK7, if you wanna 
-	# specify other JDK installation use -jdk8 argument.
-	#install_java JDK7
+	echo "--- INSTALLING GCC 4.9 ---"
+	install_gcc
 }
 
-
-# Installs the latest stable gcc available (GCC 4.9)
-install_gcc()
-{
-	download_file g++-4.9 http://gcc.parentingamerica.com/releases/gcc-4.9.2/gcc-4.9.2.tar.gz
-}
-
-# Configuring Java environment. Java has to be one of the last things to be 
-# configured because it will install the java plugin for the browser as well.
-install_java()
-{
-	clear
-	echo "--- Configuring java environment | Installing ($1) ---"
-
-	var=$1
-	
-	#testing /usr/lib/jvm for Java installation
-	if [ -d "/usr/lib/jvm" ] 
-	then # if JVM directory exists
-	    cd $JVD &&
-		case $LINUX_ARCH in
-			"x86_64")
-				case $var in 
-					"JDK7") 
-						echo "Downloading $var"
-						download_file JDK7.tar.gz http://download.oracle.com/otn-pub/java/jdk/7u71-b14/jdk-7u71-linux-x64.tar.gz ;;
-					"JDK8") 
-						echo "Downloading $var"
-						download_file JDK8.tar.gz http://download.oracle.com/otn-pub/java/jdk/8u25-b17/jdk-8u25-linux-x64.tar.gz 
-				esac ;;
-			"x86")
-				case $var in 
-					"JDK7") 
-						echo "Downloading $var" ;;
-						#download_file JDK7.tar.gz ;;
-					"JDK8") 
-						echo "Downloading $var"
-						#download_file JDK8.tar.gz ;;
-				esac
-		esac
-	else # otherwise...
-	    mkdir $JVD && cd $JVD
-		install_java $var
-	fi
-}
+      
 
 case $1 in
 	"-help")
-		echo "This script will  make  your  life  easier  by  installing  almost" 
+	echo "This script will  make  your  life  easier  by  installing  almost" 
         echo "everything that you  need  in  your  linux machine.  If  you  have" 
-		echo "doubts about what will be installed checkout:"
-		echo "--- https://github.com/rafaelcn/Linux-setup ---" 
+	echo "doubts about what will be installed checkout:"
+	echo "--- https://github.com/rafaelcn/Linux-setup ---" 
         echo "to more information."
 	exit;;
 	"") install_default ;; 
 	# "-jdk8") install_java JDK8;;
 esac
-
-#TODO: test everything that's installed!
 
 echo "System configuration complete."
