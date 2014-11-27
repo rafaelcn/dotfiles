@@ -47,6 +47,8 @@ install_gcc()
     #TODO: Extract file  and install
     download_file g++-4.9 http://gcc.parentingamerica.com/releases/gcc-4.9.2/gcc-4.9.2.tar.gz
     tar xvfJ g++-4.9
+
+    cd g++-4.9
 }
 
 create_folders()
