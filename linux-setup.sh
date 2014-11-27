@@ -72,6 +72,11 @@ create_folders()
     #   --- IDEs 
     #   |
     #   --- Programming
+	# 			|
+	#			--- C/C++
+	#			|
+	#			--- Lua
+	#	________|
     #   |
     #   --- Web-Programming
 
