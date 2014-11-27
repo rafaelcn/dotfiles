@@ -79,7 +79,6 @@ create_folders()
 	sleep 1
     else
 	mkdir $HOME/Github
-	echo ""
     fi
 
     if [ -d "$HOME/HG" ] 
@@ -88,7 +87,6 @@ create_folders()
 	sleep 1
     else
 	mkdir $HOME/HG
-	echo ""
     fi
     
     if [ -d "$HOME/SVN" ] 
@@ -97,7 +95,6 @@ create_folders()
 	sleep 1
     else
 	mkdir $HOME/SVN
-	echo ""
     fi
 
     if [ -d "$HOME/Databases" ] 
@@ -106,7 +103,6 @@ create_folders()
 	sleep 1
     else
 	mkdir $HOME/Github
-	echo ""
     fi
    
     if [ -d "$HOME/IDEs" ] 
@@ -115,7 +111,6 @@ create_folders()
 	sleep 1
     else
 	mkdir $HOME/IDEs
-	echo ""
     fi
 
     if [ -d "$HOME/Web-Programming" ] 
@@ -124,7 +119,6 @@ create_folders()
 	sleep 1
     else
 	mkdir $HOME/Web-Programming
-	echo ""
     fi
 
 }
