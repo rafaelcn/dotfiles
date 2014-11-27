@@ -26,12 +26,12 @@ __The list of the applications that will be installed when the script is run__
  - [x] HG (Mercurial)
  - [x] Git (and github integration, generating ssh keys as well, although it's not generating any keys yet)
  - [x] Synaptic Package Manager
+ - [ ] GTK+ Development library
  - [ ] Adobe Flash Player 
  - [ ] Apache 2 server
  - [ ] PyEnvironment 
  - [ ] Python 3.3
  - [x] Ruby
  - [ ] G++ 4.9
- - [ ] Java 7, 8 (and the browser plugin as well)
 
 
