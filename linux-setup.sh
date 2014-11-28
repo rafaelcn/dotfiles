@@ -18,27 +18,27 @@ JVD=("/usr/lib/jvm")
 
 if [ $(id -u) -ne 0 ] 
 then
-	echo "This  script must be ran with root privileges! If you have any doubts"
-	echo "about   the   proccess  you  can  check  source  code  of the  script" 
-	echo "for security reasons."		
-	exit
+    echo "This  script must be ran with root privileges! If you have any doubts"
+    echo "about   the   proccess  you  can  check  source  code  of the  script" 
+    echo "for security reasons."		
+    exit
 fi
 
 # Get the linux architecture
 case $(uname -p) in
-	"x86_64") LINUX_ARCH=x86_64 ;;
-	"x86") LINUX_ARCH=x86 ;;
+    "x86_64") LINUX_ARCH=x86_64 ;;
+    "x86") LINUX_ARCH=x86 ;;
 esac
 
 #
 download_file()
 {
-	NAME=$1
-	FILE=$2
+    NAME=$1
+    FILE=$2
 	
-	echo "Downloading $NAME in $FILE."	
-
-	curl -# -o $1 $2
+    echo "Downloading $NAME in $FILE."	
+    
+    curl -# -o $1 $2
 }
 
 # Installs the latest stable gcc available (GCC 4.9)
@@ -46,9 +46,10 @@ install_gcc()
 {
     #TODO: Extract file  and install
     download_file g++-4.9 http://gcc.parentingamerica.com/releases/gcc-4.9.2/gcc-4.9.2.tar.gz
-    tar xvfJ g++-4.9
-
-    cd g++-4.9
+    
+	
+	#tar xvfJ g++-4.9
+    #cd g++-4.9
 }
 
 create_folders()
@@ -72,115 +73,115 @@ create_folders()
     #   --- IDEs 
     #   |
     #   --- Programming
-	# 			|
-	#			--- C/C++
-	#			|
-	#			--- Lua
-	#	________|
+    # 		 |
+    #		 --- C/C++
+    #		 |
+    #		 --- Lua
+    #	_________|
     #   |
     #   --- Web-Programming
 
     if [ -d "$HOME/Github" ] 
     then
-		echo "\"Github\" folder already exists, skipping..."
-		sleep 1
+       	echo "\"Github\" folder already exists, skipping..."
+	sleep 1
     else
-		mkdir $HOME/Github
+	mkdir $HOME/Github
     fi
 
     if [ -d "$HOME/HG" ] 
     then
-		echo "\"Mercurial (HG)\" folder already exists, skipping..."
-		sleep 1
+	echo "\"Mercurial (HG)\" folder already exists, skipping..."
+	sleep 1
     else
-		mkdir $HOME/HG
+	mkdir $HOME/HG
     fi
     
     if [ -d "$HOME/SVN" ] 
     then
-		echo "\"SVN\" folder already exists, skipping..."
-		sleep 1
+	echo "\"SVN\" folder already exists, skipping..."
+	sleep 1
     else
-		mkdir $HOME/SVN
+	mkdir $HOME/SVN
     fi
 
     if [ -d "$HOME/Databases" ] 
     then
-		echo "\"Databases\" folder already exists, skipping..."
-		sleep 1
+	echo "\"Databases\" folder already exists, skipping..."
+	sleep 1
     else
-		mkdir $HOME/Github
+	mkdir $HOME/Github
     fi
    
     if [ -d "$HOME/IDEs" ] 
     then
-		echo "\"IDEs\" folder already exists, skipping..."
-		sleep 1
+	echo "\"IDEs\" folder already exists, skipping..."
+	sleep 1
     else
-		mkdir $HOME/IDEs
+	mkdir $HOME/IDEs
     fi
 
-	if [ -d "$HOME/Programming" ] 
+    if [ -d "$HOME/Programming" ] 
     then
-		echo "\"Programming\" folder already exists, skipping..."
-		sleep 1
+	echo "\"Programming\" folder already exists, skipping..."
+	sleep 1
     else
-		mkdir $HOME/Programming
-		mkdir $HOME/Programming/C-C++
-		mkdir $HOME/Programming/Lua
+	mkdir $HOME/Programming
+	mkdir $HOME/Programming/C-C++
+	mkdir $HOME/Programming/Lua
     fi
 
     if [ -d "$HOME/Web-Programming" ] 
     then
-		echo "\"Web-Programming\" folder already exists, skipping..."
-		sleep 1
+	echo "\"Web-Programming\" folder already exists, skipping..."
+	sleep 1
     else
-		mkdir $HOME/Web-Programming
+	mkdir $HOME/Web-Programming
     fi
 
 }
 
 install_default() 
 {
-	echo ""
-	echo "System architecture: $LINUX_ARCH."
-	echo ""
-	sleep 2
+    echo ""
+    echo "System architecture: $LINUX_ARCH."
+    echo ""
+    sleep 2
 
-	# My linux $HOME path has some additional folders
-	echo "Creating necessary folders..."
-	create_folders
+    # My linux $HOME path has some additional folders
+    echo "Creating necessary folders..."
+    create_folders
 
-	# Installing dev and other user tools.
-	echo "--- INSTALLING Git ---"
-	sudo apt-get install git -y -qq
-	echo "Git located on: " $(which git)
-	echo "--- INSTALLING Mercurial (HG) ---"
-	sudo apt-get install mercurial -y -qq
-	echo "HG located on: " $(which hg)
-	echo "--- INSTALLING Synaptic package manager ---"
-	sudo apt-get install synaptic -y -qq
-	echo "Synaptic located on: " $(which synaptic)
-	echo "--- INSTALLING Ruby"
-	apt-get install ruby -y -qq
-	echo "Ruby located on: " $(which ruby)
+    # Installing dev and other user tools.
+    echo "--- INSTALLING Git ---"
+    sudo apt-get install git -y -qq
+    echo "Git located on: " $(which git)
+    echo "--- INSTALLING Mercurial (HG) ---"
+    sudo apt-get install mercurial -y -qq
+    echo "HG located on: " $(which hg)
+    echo "--- INSTALLING Synaptic package manager ---"
+    sudo apt-get install synaptic -y -qq
+    echo "Synaptic located on: " $(which synaptic)
+    echo "--- INSTALLING Ruby"
+    apt-get install ruby -y -qq
+    echo "Ruby located on: " $(which ruby)
 
-	echo "--- INSTALLING GCC 4.9 ---"
-	install_gcc
+    echo "--- INSTALLING GCC 4.9 ---"
+    install_gcc
 }
 
       
 
 case $1 in
-	"-help")
+    "-help")
 	echo "This script will  make  your  life  easier  by  installing  almost" 
-        echo "everything that you  need  in  your  linux machine.  If  you  have" 
+	echo "everything that you  need  in  your  linux machine.  If  you  have" 
 	echo "doubts about what will be installed checkout:"
 	echo "--- https://github.com/rafaelcn/Linux-setup ---" 
-        echo "to more information."
+	echo "to more information."
 	exit;;
-	"") install_default ;; 
-	# "-jdk8") install_java JDK8;;
+    "") install_default ;; 
+    # "-jdk8") install_java JDK8;;
 esac
 
 echo "System configuration complete."
