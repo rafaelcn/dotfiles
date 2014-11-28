@@ -47,8 +47,8 @@ install_gcc()
     #TODO: Extract file  and install
     download_file g++-4.9 http://gcc.parentingamerica.com/releases/gcc-4.9.2/gcc-4.9.2.tar.gz
     
-	
-	#tar xvfJ g++-4.9
+    # If I let the instructions below uncommented, the curl will close the connection. I don't have idea why.
+    #tar xvfJ g++-4.9
     #cd g++-4.9
 }
 
@@ -165,6 +165,12 @@ install_default()
     echo "--- INSTALLING Ruby"
     apt-get install ruby -y -qq
     echo "Ruby located on: " $(which ruby)
+
+    echo "--- INSTALLING virtualenv ---"
+    pip install virtualenv
+
+    echo "--- INSTALLING GTK+ Development library"
+    sudo apt-get install -y -qq libgtk-3-dev
 
     echo "--- INSTALLING GCC 4.9 ---"
     install_gcc
