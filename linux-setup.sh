@@ -82,50 +82,60 @@ create_folders()
 
     if [ -d "$HOME/Github" ] 
     then
-	echo "\"Github\" folder already exists, skipping..."
-	sleep 1
+		echo "\"Github\" folder already exists, skipping..."
+		sleep 1
     else
-	mkdir $HOME/Github
+		mkdir $HOME/Github
     fi
 
     if [ -d "$HOME/HG" ] 
     then
-	echo "\"Mercurial (HG)\" folder already exists, skipping..."
-	sleep 1
+		echo "\"Mercurial (HG)\" folder already exists, skipping..."
+		sleep 1
     else
-	mkdir $HOME/HG
+		mkdir $HOME/HG
     fi
     
     if [ -d "$HOME/SVN" ] 
     then
-	echo "\"SVN\" folder already exists, skipping..."
-	sleep 1
+		echo "\"SVN\" folder already exists, skipping..."
+		sleep 1
     else
-	mkdir $HOME/SVN
+		mkdir $HOME/SVN
     fi
 
     if [ -d "$HOME/Databases" ] 
     then
-	echo "\"Databases\" folder already exists, skipping..."
-	sleep 1
+		echo "\"Databases\" folder already exists, skipping..."
+		sleep 1
     else
-	mkdir $HOME/Github
+		mkdir $HOME/Github
     fi
    
     if [ -d "$HOME/IDEs" ] 
     then
-	echo "\"IDEs\" folder already exists, skipping..."
-	sleep 1
+		echo "\"IDEs\" folder already exists, skipping..."
+		sleep 1
     else
-	mkdir $HOME/IDEs
+		mkdir $HOME/IDEs
+    fi
+
+	if [ -d "$HOME/Programming" ] 
+    then
+		echo "\"Programming\" folder already exists, skipping..."
+		sleep 1
+    else
+		mkdir $HOME/Programming
+		mkdir $HOME/Programming/C-C++
+		mkdir $HOME/Programming/Lua
     fi
 
     if [ -d "$HOME/Web-Programming" ] 
     then
-	echo "\"Web-Programming\" folder already exists, skipping..."
-	sleep 1
+		echo "\"Web-Programming\" folder already exists, skipping..."
+		sleep 1
     else
-	mkdir $HOME/Web-Programming
+		mkdir $HOME/Web-Programming
     fi
 
 }
