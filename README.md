@@ -27,8 +27,6 @@ __The list of the applications that will be installed when the script is run__
  - [x] Git (and github integration, generating ssh keys as well, although it's not generating any keys yet)
  - [x] Synaptic Package Manager
  - [X] GTK+ Development library
- - [ ] Adobe Flash Player 
- - [ ] Apache 2 server
  - [X] virtualenv
  - [ ] Python 3.3
  - [x] Ruby

@@ -47,6 +47,7 @@ install_gcc()
     #TODO: Extract file  and install
     download_file g++-4.9 http://gcc.parentingamerica.com/releases/gcc-4.9.2/gcc-4.9.2.tar.gz
     
+    
     # If I let the instructions below uncommented, the curl will close the connection. I don't have idea why.
     #tar xvfJ g++-4.9
     #cd g++-4.9
@@ -129,6 +130,7 @@ create_folders()
 	mkdir $HOME/Programming
 	mkdir $HOME/Programming/C-C++
 	mkdir $HOME/Programming/Lua
+	mkdir $HOME/Programming/Scala
     fi
 
     if [ -d "$HOME/Web-Programming" ] 
