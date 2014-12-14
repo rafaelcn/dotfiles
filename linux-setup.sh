@@ -64,7 +64,7 @@ install_compton()
     echo "--- INSTALLING Compton ---"
     apt-get install compton -y -qq
     echo "Downloading compton.conf file."
-    download_file compton.conf 
+    download_file compton.conf https://raw.githubusercontent.com/rafaelcn/Linux-setup/master/compton.conf
     echo "Creating compton configuration."
     if [ -d "$HOME/.config/" ] then
 	mkdir $HOME/.config/
