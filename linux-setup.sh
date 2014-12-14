@@ -53,6 +53,43 @@ install_gcc()
     #cd g++-4.9
 }
 
+
+install_compton() 
+{
+    echo "Adding comptom PPA..."
+    apt-add-repository ppa:richardgv/compton -y -qq
+    echo "Updating repository list."
+    apt-get update -qq
+    clear
+    echo "--- INSTALLING Compton ---"
+    apt-get install compton -y -qq
+    echo "Downloading compton.conf file."
+    download_file compton.conf 
+    echo "Creating compton configuration."
+    if [ -d "$HOME/.config/" ] then
+	mkdir $HOME/.config/
+	
+    fi
+	
+    mv compton.conf $HOME/.config/
+    
+    # Adding as a startup application.
+    echo "[Desktop Entry]
+Encoding=UTF-8 
+Version=0.9.4
+Type=Application
+Name=Compton
+Comment=Compositor for X11
+Exec=compton 
+OnlyShowIn=XFCE;
+StartupNotify=false 
+Terminal=false
+Hidden=false" > $HOME/.config/autostart/Compton.desktop
+
+    echo "Compton installation complete!"
+    
+}
+
 create_folders()
 {
     # My $HOME folder structure:
@@ -154,6 +191,9 @@ install_default()
     echo "Creating necessary folders..."
     create_folders
 
+    # Installing compton X11 composition
+    install_compton
+
     # Installing dev and other user tools.
     echo "--- INSTALLING Git ---"
     sudo apt-get install git -y -qq
@@ -176,6 +216,9 @@ install_default()
 
     echo "--- INSTALLING GCC 4.9 ---"
     install_gcc
+
+    # Starting Compton
+    compton
 }
 
       
