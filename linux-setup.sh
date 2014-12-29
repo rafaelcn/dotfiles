@@ -9,18 +9,16 @@
 ###################### Global variables ############################
 
 # The architecture of the linux being executed (none by default).
-LINUX_ARCH=("none")
-
-# Java directory
-JVD=("/usr/lib/jvm")	
+LINUX_ARCH=("none")	
 
 ####################################################################
 
-if [ $(id -u) -ne 0 ] 
+# This file has to be divided, it has to be run as a normal user, $HOME will result into /root/~
+
+if [ $(id -u) -eq 0 ] 
 then
-    echo "This  script must be ran with root privileges! If you have any doubts"
-    echo "about   the   proccess  you  can  check  source  code  of the  script" 
-    echo "for security reasons."		
+    echo "This  script must not be ran with root privileges."
+    echo "That's because your home directory will be used."
     exit
 fi
 
@@ -68,7 +66,6 @@ install_compton()
     echo "Creating compton configuration."
     if [ -d "$HOME/.config/" ] then
 	mkdir $HOME/.config/
-	
     fi
 	
     mv compton.conf $HOME/.config/
@@ -217,7 +214,8 @@ install_default()
     echo "--- INSTALLING GCC 4.9 ---"
     install_gcc
 
-    # Starting Compton
+    
+    # Starting Compton (Note that you have to disable the default compositor to compton work)
     compton
 }
 
@@ -232,7 +230,6 @@ case $1 in
 	echo "to more information."
 	exit;;
     "") install_default ;; 
-    # "-jdk8") install_java JDK8;;
 esac
 
 echo "System configuration complete."
