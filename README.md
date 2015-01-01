@@ -31,6 +31,7 @@ __The list of the applications that will be installed when the script is run__
  - [X] Compton (X11 compositor)
  - [ ] Python 3.3
  - [x] Ruby
- - [ ] G++ 4.9
+ - [X] G++ 4.9
+ - [X] Valgrind
 
 

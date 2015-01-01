@@ -42,13 +42,23 @@ download_file()
 # Installs the latest stable gcc available (GCC 4.9)
 install_gcc()
 {
-    #TODO: Extract file  and install
-    download_file g++-4.9 http://gcc.parentingamerica.com/releases/gcc-4.9.2/gcc-4.9.2.tar.gz
+    # This was only tested on Xubuntu 14.04
+    sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y -qq
+    sudo apt-get update -qq
+    sudo apt-get install g++-4.9 -y -qq
+}
+
+install_valgrind()
+{
+    clear
+    echo "Downloading Valgrind 3.10.1"
+    download_file Valgrind.tar.bz2 valgrind.org/downloads/valgrind-3.10.1.tar.bz2
     
+    tar -fjx Valgrind.tar.bz2
     
-    # If I let the instructions below uncommented, the curl will close the connection. I don't have idea why.
-    #tar xvfJ g++-4.9
-    #cd g++-4.9
+    cd Valgrind
+    ./configure
+    sudo make && make install -j 3
 }
 
 
@@ -213,6 +223,9 @@ install_default()
 
     echo "--- INSTALLING GCC 4.9 ---"
     install_gcc
+
+    echo "--- INSTALLING Valgrind ---"
+    install valgrind
 
     
     # Starting Compton (Note that you have to disable the default compositor to compton work)
