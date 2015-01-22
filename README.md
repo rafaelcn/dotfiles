@@ -25,13 +25,15 @@ __The list of the applications that will be installed when the script is run__
 
  - [x] HG (Mercurial)
  - [x] Git (and github integration, generating ssh keys as well, although it's not generating any keys yet)
+ - [X] Subversion
  - [x] Synaptic Package Manager
+ - [ ] Emacs
  - [X] GTK+ Development library
  - [X] virtualenv
  - [X] Compton (X11 compositor)
  - [ ] Python 3.3
  - [x] Ruby
+ - [ ] Deluge
+ - [X] G++
  - [X] G++ 4.9
- - [X] Valgrind
-
 
