@@ -25,7 +25,7 @@ __The list of the applications that will be installed when the script is run__
 
  - [x] Xubuntu restricted extras
  - [x] HG (Mercurial)
- - [x] Git (and github integration, generating ssh keys as well, although it's not generating any keys yet)
+ - [x] Git
  - [x] Subversion
  - [x] Synaptic Package Manager
  - [x] Emacs
