@@ -23,17 +23,17 @@ Applications
 
 __The list of the applications that will be installed when the script is run__
 
+ - [x] Xubuntu restricted extras
  - [x] HG (Mercurial)
  - [x] Git (and github integration, generating ssh keys as well, although it's not generating any keys yet)
- - [X] Subversion
+ - [x] Subversion
  - [x] Synaptic Package Manager
- - [ ] Emacs
- - [X] GTK+ Development library
- - [X] virtualenv
- - [X] Compton (X11 compositor)
+ - [x] Emacs
+ - [x] GTK+ Development library
+ - [x] virtualenv
+ - [x] Compton (X11 compositor)
  - [ ] Python 3.3
  - [x] Ruby
  - [ ] Deluge
- - [X] G++
- - [X] G++ 4.9
+ - [x] G++ 4.9
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 #: Title	: Linux Setup
 #: Date		: 10/13/2014 (MM/DD/YYYY).
-#: Author	: Rafael C. Nunes <rafaelnunes737@hotmail.com>
+#: Author	: Rafael C. Nunes <rafaelnunes737 at hotmail dot com>
 #: License	: MIT
 #: Version	: 0.1
 #: Options	: -help, -gen-ssh.
@@ -39,12 +39,9 @@ download_file()
     curl -# -o $1 $2
 }
 
-# Intalls the GNU C++ compilers
+# Intalls the GNU C++ 4.9 compiler
 install_gnu_cplusplus()
 {
-	sudo apt-get update -qq
-	sudo apt-get install g++ -y -qq # installing g++
-
     # This was only tested on Xubuntu 14.04
     sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
     sudo apt-get update -qq
@@ -68,7 +65,7 @@ install_valgrind()
 install_compton() 
 {
     echo "Adding comptom PPA..."
-    apt-add-repository ppa:richardgv/compton -y -qq
+    apt-add-repository ppa:richardgv/compton -y
     echo "Updating repository list."
     apt-get update -qq
     clear
@@ -103,90 +100,63 @@ Hidden=false" > $HOME/.config/autostart/Compton.desktop
 
 create_folders()
 {
-    # My $HOME folder structure:
-    # 
-    # $HOME
-    #   |
-    #   --- Github
-    #   |
-    #   --- HG  
-    #   |
-    #   --- SVN
-    #   |
-    #   --- Databases
-    #   |  
-    #   --- py-env
-    #   |
-    #   --- Math
-    #   |
-    #   --- IDEs 
-    #   |
-    #   --- Programming
-    # 		 |
-    #		 --- C/C++
-    #		 |
-    #		 --- Lua
-    #	_________|
-    #   |
-    #   --- Web-Programming
-
     if [ -d "$HOME/Github" ] 
     then
        	echo "\"Github\" folder already exists, skipping..."
-		sleep 1
+	sleep 1
     else
-		mkdir $HOME/Github
+	mkdir $HOME/Github
     fi
 
     if [ -d "$HOME/HG" ] 
     then
-		echo "\"Mercurial (HG)\" folder already exists, skipping..."
-		sleep 1
+	echo "\"Mercurial (HG)\" folder already exists, skipping..."
+	sleep 1
     else
-		mkdir $HOME/HG
+	mkdir $HOME/HG
     fi
     
     if [ -d "$HOME/SVN" ] 
     then
-		echo "\"SVN\" folder already exists, skipping..."
-		sleep 1
+	echo "\"SVN\" folder already exists, skipping..."
+	sleep 1
     else
-		mkdir $HOME/SVN
+	mkdir $HOME/SVN
     fi
 
     if [ -d "$HOME/Databases" ] 
     then
-		echo "\"Databases\" folder already exists, skipping..."
-		sleep 1
+	echo "\"Databases\" folder already exists, skipping..."
+	sleep 1
     else
-		mkdir $HOME/Github
+	mkdir $HOME/Github
     fi
    
     if [ -d "$HOME/IDEs" ] 
     then
-		echo "\"IDEs\" folder already exists, skipping..."
-		sleep 1
+	echo "\"IDEs\" folder already exists, skipping..."
+	sleep 1
     else
-		mkdir $HOME/IDEs
+	mkdir $HOME/IDEs
     fi
 
     if [ -d "$HOME/Programming" ] 
     then
-		echo "\"Programming\" folder already exists, skipping..."
-		sleep 1
+	echo "\"Programming\" folder already exists, skipping..."
+	sleep 1
     else
-		mkdir $HOME/Programming
-		mkdir $HOME/Programming/C-C++
-		mkdir $HOME/Programming/Lua
-		mkdir $HOME/Programming/Scala
+	mkdir $HOME/Programming
+	mkdir $HOME/Programming/C-C++
+	mkdir $HOME/Programming/Lua
+	mkdir $HOME/Programming/Scala
     fi
 
     if [ -d "$HOME/Web-Programming" ] 
     then
-		echo "\"Web-Programming\" folder already exists, skipping..."
-		sleep 1
+	echo "\"Web-Programming\" folder already exists, skipping..."
+	sleep 1
     else
-		mkdir $HOME/Web-Programming
+	mkdir $HOME/Web-Programming
     fi
 
 }
@@ -196,32 +166,27 @@ install_default()
     echo ""
     echo "System architecture: $LINUX_ARCH."
     echo ""
+    echo "This installation may take a while, seat back and enjoy."
     sleep 2
 
     # My linux $HOME path has some additional folders
-    echo "Creating necessary folders..."
     create_folders
-	
-	echo "--- INSTALLING GNU compilers ---"
+    
     install_gnu_cplusplus
-	
-    # Installing compton X11 composition
-    install_compton
-
-    # Installing developer and other user tools.
-    echo "Installing developer tools..."
+    install valgrind
+    
+    sudo apt-get install xubuntu-restricted-extras -y -qq
     sudo apt-get install git -y -qq
     sudo apt-get install mercurial -y -qq
     sudo apt-get install subversion -y -qq
     sudo apt-get install synaptic -y -qq
+    sudo apt-get install emacs -y -qq
     sudo apt-get install -y -qq libgtk-3-dev
     sudo apt-get install ruby -y -qq
 
     pip install virtualenv
-
-    echo "--- INSTALLING Valgrind ---"
-    install valgrind
-
+    
+    install_compton
     # Starting Compton (Note that you have to disable the default compositor to compton work)
     compton
 }
@@ -229,16 +194,24 @@ install_default()
 generate_ssh()
 {
     clear
-    echo "Generating ssh keys for github"
-    ls -al ~/.ssh
-    echo "Your email please: "
-    read email
-    ssh-keygen -t rsa -C "$email"
-    eval "$(ssh-agent -s)"
-    ssh-add ~/.ssh/id_rsa
-    echo "This is your SSH key. Select all and copy to your clipboard. Then, go to your github"
-    echo "and add the ssh key."
-    mousepad ~/.ssh/id_rsa.pub
+    echo "Generating ssh keys for github..."
+    sleep 1
+    if [ -d "~/.ssh" ] # FIXME: This doesn't look for hidden folders.
+    then
+	echo "You probably already have ssh keys. Look into the ~/.ssh directory."
+    else
+	echo "Your email please: "
+	read email
+	ssh-keygen -t rsa -C "$email"
+	eval "$(ssh-agent -s)"
+	ssh-add ~/.ssh/id_rsa
+	echo "This is your SSH key. Select all and copy to your clipboard. Then, go to your github"
+	echo "and add the ssh key."
+	mousepad ~/.ssh/id_rsa.pub
+	echo "When you're ready, press enter and we gonna begin testing the SSH."
+	read enter
+	ssh -T git@github.com
+    fi
 }
 
 case $1 in
