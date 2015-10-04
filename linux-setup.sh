@@ -204,22 +204,17 @@ generate_ssh()
     clear
     echo "Generating ssh keys for github..."
     sleep 1
-    #if [ -d "~/.ssh" ] # FIXME: This doesn't look for hidden folders.
-    #then
-    #   echo "You probably already have ssh keys. Look into the ~/.ssh directory."
-    #else
 	echo "Your email please: "
 	read email
 	ssh-keygen -t rsa -C "$email"
 	eval "$(ssh-agent -s)"
 	ssh-add ~/.ssh/id_rsa
-	echo "This is your SSH key. Select all and copy to your clipboard. Then, go to your github"
-	echo "and add the ssh key."
+	echo "This is your SSH key. Select all and copy to your clipboard. Then, "
+	echo "go to your github and add the ssh key."
 	mousepad ~/.ssh/id_rsa.pub
 	echo "When you're ready, press enter and we gonna begin testing the SSH."
 	read enter
 	ssh -T git@github.com
-    #fi
 }
 
 case $1 in 
