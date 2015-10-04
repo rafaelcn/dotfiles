@@ -28,7 +28,22 @@ case $(uname -p) in
     "x86") LINUX_ARCH=x86 ;;
 esac
 
-#
+
+show_help() 
+{
+    echo "This script will  make  your  life  easier  by  installing  almost" 
+	echo "everything that you  need  in  your  linux machine.  If  you  have" 
+	echo "doubts about what will be installed checkout:"
+	echo "------------ https://github.com/rafaelcn/Linux-setup ------------" 
+    echo "" 
+    echo "Usage: ./linux-setup [options]"
+    echo "Options:"
+    echo "-h || --h || -help || --help          Show the program help."
+    echo "-gen-ssh              Generates the Github ssh keys for you." 
+}
+
+
+
 download_file()
 {
     NAME=$1
@@ -39,6 +54,8 @@ download_file()
     curl -# -o $1 $2
 }
 
+
+# 
 install_valgrind()
 {
     clear
@@ -187,10 +204,10 @@ generate_ssh()
     clear
     echo "Generating ssh keys for github..."
     sleep 1
-    if [ -d "~/.ssh" ] # FIXME: This doesn't look for hidden folders.
-    then
-	echo "You probably already have ssh keys. Look into the ~/.ssh directory."
-    else
+    #if [ -d "~/.ssh" ] # FIXME: This doesn't look for hidden folders.
+    #then
+    #   echo "You probably already have ssh keys. Look into the ~/.ssh directory."
+    #else
 	echo "Your email please: "
 	read email
 	ssh-keygen -t rsa -C "$email"
@@ -202,20 +219,15 @@ generate_ssh()
 	echo "When you're ready, press enter and we gonna begin testing the SSH."
 	read enter
 	ssh -T git@github.com
-    fi
+    #fi
 }
 
-case $1 in
-    "-help")
-	echo "This script will  make  your  life  easier  by  installing  almost" 
-	echo "everything that you  need  in  your  linux machine.  If  you  have" 
-	echo "doubts about what will be installed checkout:"
-	echo "--- https://github.com/rafaelcn/Linux-setup ---" 
-	echo "to more information."
-	exit;;
-    "-gen-ssh")
-	generate_ssh
-	exit;;
+case $1 in 
+    "-help") show_help exit;;
+    "-h") show_help exit;;
+    "--h") show_help exit;;
+    "--help") show_help exit;;
+    "-gen-ssh") generate_ssh exit;;
     "") install_default 
 	exit;; 
 esac
