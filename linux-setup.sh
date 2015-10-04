@@ -39,15 +39,6 @@ download_file()
     curl -# -o $1 $2
 }
 
-# Intalls the GNU C++ 4.9 compiler
-install_gnu_cplusplus()
-{
-    # This was only tested on Xubuntu 14.04
-    sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-    sudo apt-get update -qq
-    sudo apt-get install g++-4.9 -y -qq
-}
-
 install_valgrind()
 {
     clear
@@ -172,8 +163,8 @@ install_default()
     # My linux $HOME path has some additional folders
     create_folders
     
-    install_gnu_cplusplus
-    install valgrind
+
+    install_valgrind
     
     sudo apt-get install xubuntu-restricted-extras -y -qq
     sudo apt-get install git -y -qq
