@@ -1,7 +1,7 @@
 Linux setup tool.
 ===========
 
-A tool for creating my linux environment automatically (specifically my Xubuntu 14.04).
+A tool for creating my linux environment automatically (specifically my Xubuntu 15.04). And to generate my Github ssh-keys.
 
 __This work is greatly inspired by the [webcoyote](https://github.com/webcoyote/linux-setup) one.__
 
@@ -35,5 +35,7 @@ __The list of the applications that will be installed when the script is run__
  - [ ] Python 3.3
  - [x] Ruby
  - [ ] Deluge
- - [x] G++ 4.9
 
+__Note: it also generate github ssh keys. Awesome, isn't? Just use:__
+
+`./linux-setup.sh -gen-ssh`
