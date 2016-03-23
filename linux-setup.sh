@@ -9,13 +9,13 @@
 ###################### Global variables ############################
 
 # The architecture of the linux being executed (none by default).
-LINUX_ARCH=("none")	
+LINUX_ARCH=("none")
 
 ####################################################################
 
 # This file has to be divided, it has to be run as a normal user, $HOME will result into /root/~
 
-if [ $(id -u) -eq 0 ] 
+if [ $(id -u) -eq 0 ]
 then
     echo "This  script must not be ran with root privileges."
     echo "That's because your home directory will be used."
@@ -29,17 +29,17 @@ case $(uname -p) in
 esac
 
 
-show_help() 
+show_help()
 {
-    echo "This script will  make  your  life  easier  by  installing  almost" 
-	echo "everything that you  need  in  your  linux machine.  If  you  have" 
+    echo "This script will  make  your  life  easier  by  installing  almost"
+	echo "everything that you  need  in  your  linux machine.  If  you  have"
 	echo "doubts about what will be installed checkout:"
-	echo "------------ https://github.com/rafaelcn/Linux-setup ------------" 
-    echo "" 
+	echo "------------ https://github.com/rafaelcn/Linux-setup ------------"
+    echo ""
     echo "Usage: ./linux-setup [options]"
     echo "Options:"
     echo "-h || --h || -help || --help          Show the program help."
-    echo "-gen-ssh              Generates the Github ssh keys for you." 
+    echo "-gen-ssh              Generates the Github ssh keys for you."
 }
 
 
@@ -48,29 +48,27 @@ download_file()
 {
     NAME=$1
     FILE=$2
-	
-    echo "Downloading $NAME in $FILE."	
-    
+
+    echo "Downloading $NAME in $FILE."
     curl -# -o $1 $2
 }
 
 
-# 
 install_valgrind()
 {
     clear
     echo "Downloading Valgrind 3.10.1"
     download_file Valgrind.tar.bz2 valgrind.org/downloads/valgrind-3.10.1.tar.bz2
-    
+
     tar -fjx Valgrind.tar.bz2
-    
+
     cd Valgrind
     ./configure
     sudo make && make install -j 3
 }
 
 
-install_compton() 
+install_compton()
 {
     echo "Adding comptom PPA..."
     apt-add-repository ppa:richardgv/compton -y
@@ -82,94 +80,93 @@ install_compton()
     echo "Downloading compton.conf file."
     download_file compton.conf https://raw.githubusercontent.com/rafaelcn/Linux-setup/master/compton.conf
     echo "Creating compton configuration."
-    if [ -d "$HOME/.config/" ] 
+    if [ -d "$HOME/.config/" ]
 	then
-	mkdir $HOME/.config/
+		mkdir $HOME/.config/
     fi
-	
+
     mv compton.conf $HOME/.config/
-    
+
     # Adding as a startup application.
     echo "[Desktop Entry]
-Encoding=UTF-8 
+Encoding=UTF-8
 Version=0.9.4
 Type=Application
 Name=Compton
 Comment=Compositor for X11
-Exec=compton 
+Exec=compton
 OnlyShowIn=XFCE;
-StartupNotify=false 
+StartupNotify=false
 Terminal=false
 Hidden=false" > $HOME/.config/autostart/Compton.desktop
 
     echo "Compton installation complete!"
-    
 }
 
 create_folders()
 {
-    if [ -d "$HOME/Github" ] 
+    if [ -d "$HOME/Github" ]
     then
-       	echo "\"Github\" folder already exists, skipping..."
-	sleep 1
+    	echo "\"Github\" folder already exists, skipping..."
+		sleep 1
     else
-	mkdir $HOME/Github
+		mkdir $HOME/Github
     fi
 
-    if [ -d "$HOME/HG" ] 
+    if [ -d "$HOME/HG" ]
     then
-	echo "\"Mercurial (HG)\" folder already exists, skipping..."
-	sleep 1
+		echo "\"Mercurial (HG)\" folder already exists, skipping..."
+		sleep 1
     else
-	mkdir $HOME/HG
-    fi
-    
-    if [ -d "$HOME/SVN" ] 
-    then
-	echo "\"SVN\" folder already exists, skipping..."
-	sleep 1
-    else
-	mkdir $HOME/SVN
+		mkdir $HOME/HG
     fi
 
-    if [ -d "$HOME/Databases" ] 
+    if [ -d "$HOME/SVN" ]
     then
-	echo "\"Databases\" folder already exists, skipping..."
-	sleep 1
+		echo "\"SVN\" folder already exists, skipping..."
+		sleep 1
     else
-	mkdir $HOME/Github
-    fi
-   
-    if [ -d "$HOME/IDEs" ] 
-    then
-	echo "\"IDEs\" folder already exists, skipping..."
-	sleep 1
-    else
-	mkdir $HOME/IDEs
+		mkdir $HOME/SVN
     fi
 
-    if [ -d "$HOME/Programming" ] 
+    if [ -d "$HOME/Databases" ]
     then
-	echo "\"Programming\" folder already exists, skipping..."
-	sleep 1
+		echo "\"Databases\" folder already exists, skipping..."
+		sleep 1
     else
-	mkdir $HOME/Programming
-	mkdir $HOME/Programming/C-C++
-	mkdir $HOME/Programming/Lua
-	mkdir $HOME/Programming/Scala
+		mkdir $HOME/Github
     fi
 
-    if [ -d "$HOME/Web-Programming" ] 
+    if [ -d "$HOME/IDEs" ]
     then
-	echo "\"Web-Programming\" folder already exists, skipping..."
+		echo "\"IDEs\" folder already exists, skipping..."
+		sleep 1
+    else
+		mkdir $HOME/IDEs
+    fi
+
+    if [ -d "$HOME/Programming" ]
+    then
+		echo "\"Programming\" folder already exists, skipping..."
 	sleep 1
     else
-	mkdir $HOME/Web-Programming
+		mkdir $HOME/Programming
+		mkdir $HOME/Programming/C-C++
+		mkdir $HOME/Programming/Lua
+		mkdir $HOME/Programming/Scala
+    fi
+
+    if [ -d "$HOME/Web-Programming" ]
+    then
+		echo "\"Web-Programming\" folder already exists, skipping..."
+		sleep 1
+    else
+		mkdir $HOME/Web-Programming
     fi
 
 }
 
-install_default() 
+install_default()
 {
     echo ""
     echo "System architecture: $LINUX_ARCH."
@@ -179,10 +176,9 @@ install_default()
 
     # My linux $HOME path has some additional folders
     create_folders
-    
 
     install_valgrind
-    
+
     sudo apt-get install xubuntu-restricted-extras -y -qq
     sudo apt-get install git -y -qq
     sudo apt-get install mercurial -y -qq
@@ -193,38 +189,46 @@ install_default()
     sudo apt-get install ruby -y -qq
 
     pip install virtualenv
-    
+
     install_compton
     # Starting Compton (Note that you have to disable the default compositor to compton work)
     compton
 }
-      
+
+
 generate_ssh()
 {
-    clear
-    echo "Generating ssh keys for github..."
-    sleep 1
-	echo "Your email please: "
-	read email
-	ssh-keygen -t rsa -C "$email"
-	eval "$(ssh-agent -s)"
-	ssh-add ~/.ssh/id_rsa
-	echo "This is your SSH key. Select all and copy to your clipboard. Then, "
-	echo "go to your github and add the ssh key."
-	mousepad ~/.ssh/id_rsa.pub
-	echo "When you're ready, press enter and we gonna begin testing the SSH."
-	read enter
-	ssh -T git@github.com
+	clear
+	SSH_KEYGEN=`which ssh-keygen`
+	if [ -z $SSH ]
+	then
+		echo "The ssh program could not be found"
+		return 0
+	else
+    	echo "Generating ssh keys for github..."
+    	sleep 1
+		echo "Your email please: "
+		read email
+		$SSH_KEYGEN -t rsa -C "$email"
+		eval "$(ssh-agent -s)"
+		ssh-add ~/.ssh/id_rsa
+		echo "This is your SSH key. Select all and copy to your clipboard. Then, "
+		echo "go to your github and add the ssh key."
+		mousepad ~/.ssh/id_rsa.pub
+		echo "When you're ready, press enter and we gonna begin testing the SSH."
+		read enter
+		ssh -T git@github.com
+	fi
 }
 
-case $1 in 
+case $1 in
     "-help") show_help exit;;
     "-h") show_help exit;;
     "--h") show_help exit;;
     "--help") show_help exit;;
     "-gen-ssh") generate_ssh exit;;
-    "") install_default 
-	exit;; 
+    "") install_default
+	exit;;
 esac
 
 echo "System configuration complete."
