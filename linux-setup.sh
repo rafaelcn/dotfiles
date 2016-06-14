@@ -202,8 +202,9 @@ generate_ssh()
 	SSH_KEYGEN=`which ssh-keygen`
 	if [ -z $SSH ]
 	then
-		echo "The ssh program could not be found"
-		return 0
+		echo "The ssh-keygen program could not be found. It won't be possible to "
+		echo "generate key."
+		return 127
 	else
     	echo "Generating ssh keys for github..."
     	sleep 1
