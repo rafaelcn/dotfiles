@@ -1,0 +1,49 @@
+conky.config = {
+    update_interval = 1.0,
+    total_run_times = 0,
+    net_avg_samples = 1,
+    cpu_avg_samples = 1,
+    double_buffer = true,
+    no_buffers = true,
+    use_xft = true,
+    font = 'Ubuntu: size=11',
+    override_utf8_locale = true,
+    text_buffer_size = 2048,
+
+    own_window = true,
+    own_window_type = 'desktop',
+    own_window_argb_visual = true,
+    own_window_transparent = true,
+    own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+
+
+    minimum_width = 210,
+    minimum_height = 280,
+
+    alignment = 'top_right',
+    gap_x = 10,
+    gap_y = 210,
+    draw_shades = false,
+    default_color = '303030',
+    default_shade_color = '000000',
+    own_window_argb_visual = true,
+    own_window_colour = 'fff',
+    own_window_argb_value = 0
+}
+
+conky.text = [[
+    ${goto 10}${voffset 10}${font Ubuntu:size=13}${exec whoami}@${nodename}
+    ${font}${color}${goto 10}Uptime: ${uptime}
+    ${voffset 10}${goto 10}CPU
+    ${goto 10}${color}${cpugraph}
+    ${voffset 10}${goto 10}/home${color}${goto 128}
+    ${goto 38}Used ${fs_used /home}
+    ${goto 38}Free ${fs_free /home}
+    ${voffset 10}${goto 10}RAM${goto 60}SWAP
+    ${goto 10}${memperc}%${goto 60}${swapperc}${color}${font}%
+    ${voffset 10}${goto 10}${color black}Networking:
+    Up:$color ${upspeed wlan0} ${color black}
+    Down:$color ${downspeed wlan0}
+]]
+
+    -- ${image /home/ranu/.conky/lsd.png -p 10,0}
