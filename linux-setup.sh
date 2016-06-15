@@ -1,7 +1,7 @@
 #!/bin/bash
 #: Title	: Linux Setup
 #: Date		: 10/13/2014 (MM/DD/YYYY).
-#: Author	: Rafael C. Nunes <rafaelnunes737 at hotmail dot com>
+#: Author	: Rafael C. Nunes <rafaelnunes at engineer dot com>
 #: License	: MIT
 #: Version	: 0.1
 #: Options	: -help, -gen-ssh.
@@ -29,7 +29,7 @@ case $(uname -p) in
 esac
 
 
-show_help()
+help()
 {
     echo "This script will  make  your  life  easier  by  installing  almost"
 	echo "everything that you  need  in  your  linux machine.  If  you  have"
@@ -64,7 +64,7 @@ install_valgrind()
 
     cd Valgrind
     ./configure
-    sudo make && make install -j 3
+    sudo make && make install -j 2
 }
 
 
@@ -80,10 +80,7 @@ install_compton()
     echo "Downloading compton.conf file."
     download_file compton.conf https://raw.githubusercontent.com/rafaelcn/Linux-setup/master/compton.conf
     echo "Creating compton configuration."
-    if [ -d "$HOME/.config/" ]
-	then
-		mkdir $HOME/.config/
-    fi
+	mkdir -p $HOME/.config/
 
     mv compton.conf $HOME/.config/
 
@@ -98,7 +95,7 @@ Exec=compton
 OnlyShowIn=XFCE;
 StartupNotify=false
 Terminal=false
-Hidden=false" > $HOME/.config/autostart/Compton.desktop
+Hidden=false" > $HOME/.config/autostart/compton.desktop
 
     echo "Compton installation complete!"
 }
@@ -171,7 +168,7 @@ install_default()
     echo ""
     echo "System architecture: $LINUX_ARCH."
     echo ""
-    echo "This installation may take a while, seat back and enjoy."
+    echo "This installation may take a while, sit back and enjoy."
     sleep 2
 
     # My linux $HOME path has some additional folders
@@ -223,7 +220,7 @@ generate_ssh()
 }
 
 case $1 in
-    "-help") show_help exit;;
+    "-help") help exit;;
     "-h") show_help exit;;
     "--h") show_help exit;;
     "--help") show_help exit;;
