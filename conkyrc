@@ -45,5 +45,3 @@ conky.text = [[
     Up:$color ${upspeed wlan0} ${color black}
     Down:$color ${downspeed wlan0}
 ]]
-
-    -- ${image /home/ranu/.conky/lsd.png -p 10,0}
