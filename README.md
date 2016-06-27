@@ -1,9 +1,9 @@
-Linux setup tool.
+_.dotfiles_
 ===========
 
-A tool for creating my linux environment automatically (specifically my Xubuntu 15.04). And to generate my Github ssh-keys.
+A set of files describing the behaviour of the apps that I use and also a tool to configure my linux environment automatically (specifically my Xubuntu 16.04).
 
-__This work is greatly inspired by the [webcoyote](https://github.com/webcoyote/linux-setup) one.__
+__This work is inspired by the [webcoyote](https://github.com/webcoyote/linux-setup) one.__
 
 Installation
 ===
@@ -29,12 +29,9 @@ __The list of the applications that will be installed when the script is run__
  - [x] Subversion
  - [x] Synaptic Package Manager
  - [x] Emacs
- - [x] GTK+ Development library
  - [x] virtualenv
  - [x] Compton (X11 compositor)
- - [ ] Python 3.3
- - [x] Ruby
- - [ ] Deluge
+ - [X] Deluge
 
 __Note: it also generate github ssh keys. Awesome, isn't? Just use:__
 

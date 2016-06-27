@@ -1,5 +1,5 @@
 #!/bin/bash
-#: Title	: Linux Setup
+#: Title	: linux-setup.sh
 #: Date		: 10/13/2014 (MM/DD/YYYY).
 #: Author	: Rafael C. Nunes <rafaelnunes at engineer dot com>
 #: License	: MIT
@@ -31,10 +31,9 @@ esac
 
 help()
 {
-    echo "This script will  make  your  life  easier  by  installing  almost"
-	echo "everything that you  need  in  your  linux machine.  If  you  have"
+    echo "Install the basic stuff that a developer (I) need."
 	echo "doubts about what will be installed checkout:"
-	echo "------------ https://github.com/rafaelcn/Linux-setup ------------"
+	echo "------------ https://github.com/rafaelcn/dotfiles ------------"
     echo ""
     echo "Usage: ./linux-setup [options]"
     echo "Options:"
@@ -182,10 +181,9 @@ install_default()
     sudo apt-get install subversion -y -qq
     sudo apt-get install synaptic -y -qq
     sudo apt-get install emacs -y -qq
-    sudo apt-get install -y -qq libgtk-3-dev
-    sudo apt-get install ruby -y -qq
+    sudo apt-get install deluge -y -qq
 
-    pip install virtualenv
+    pip3 install virtualenv
 
     install_compton
     # Starting Compton (Note that you have to disable the default compositor to compton work)
