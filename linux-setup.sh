@@ -4,7 +4,7 @@
 #: Author	: Rafael C. Nunes <rafaelnunes at engineer dot com>
 #: License	: MIT
 #: Version	: 0.1
-#: Options	: -help, -gen-ssh.
+#: Options	: --help, --gen-ssh.
 
 ###################### Global variables ############################
 
@@ -31,16 +31,17 @@ esac
 
 help()
 {
+    echo.
+    echo.
     echo "Install the basic stuff that a developer (I) need."
 	echo "doubts about what will be installed checkout:"
 	echo "------------ https://github.com/rafaelcn/dotfiles ------------"
     echo ""
     echo "Usage: ./linux-setup [options]"
     echo "Options:"
-    echo "-h || --h || -help || --help          Show the program help."
-    echo "-gen-ssh              Generates the Github ssh keys for you."
+    echo "-h || --h || -help || --help    Show the program help."
+    echo "-gen-ssh                        Generates the Github ssh keys for you."
 }
-
 
 
 download_file()
@@ -64,39 +65,6 @@ install_valgrind()
     cd Valgrind
     ./configure
     sudo make && make install -j 2
-}
-
-
-install_compton()
-{
-    echo "Adding comptom PPA..."
-    apt-add-repository ppa:richardgv/compton -y
-    echo "Updating repository list."
-    apt-get update -qq
-    clear
-    echo "--- INSTALLING Compton ---"
-    apt-get install compton -y -qq
-    echo "Downloading compton.conf file."
-    download_file compton.conf https://raw.githubusercontent.com/rafaelcn/Linux-setup/master/compton.conf
-    echo "Creating compton configuration."
-	mkdir -p $HOME/.config/
-
-    mv compton.conf $HOME/.config/
-
-    # Adding as a startup application.
-    echo "[Desktop Entry]
-Encoding=UTF-8
-Version=0.9.4
-Type=Application
-Name=Compton
-Comment=Compositor for X11
-Exec=compton
-OnlyShowIn=XFCE;
-StartupNotify=false
-Terminal=false
-Hidden=false" > $HOME/.config/autostart/compton.desktop
-
-    echo "Compton installation complete!"
 }
 
 create_folders()
@@ -149,17 +117,7 @@ create_folders()
 		mkdir $HOME/Programming
 		mkdir $HOME/Programming/C-C++
 		mkdir $HOME/Programming/Lua
-		mkdir $HOME/Programming/Scala
     fi
-
-    if [ -d "$HOME/Web-Programming" ]
-    then
-		echo "\"Web-Programming\" folder already exists, skipping..."
-		sleep 1
-    else
-		mkdir $HOME/Web-Programming
-    fi
-
 }
 
 install_default()
@@ -186,8 +144,6 @@ install_default()
     pip3 install virtualenv
 
     install_compton
-    # Starting Compton (Note that you have to disable the default compositor to compton work)
-    compton
 }
 
 
@@ -195,14 +151,16 @@ generate_ssh()
 {
 	clear
 	SSH_KEYGEN=`which ssh-keygen`
-	if [ -z $SSH ]
+	EDITOR=`which mousepad`
+	
+	if [ -z $SSH_KEYGEN ]
 	then
 		echo "The ssh-keygen program could not be found. It won't be possible to "
 		echo "generate key."
 		return 127
 	else
-    	echo "Generating ssh keys for github..."
-    	sleep 1
+    		echo "Generating ssh keys for github..."
+	    	sleep 1
 		echo "Your email please: "
 		read email
 		$SSH_KEYGEN -t rsa -C "$email"
@@ -210,7 +168,11 @@ generate_ssh()
 		ssh-add ~/.ssh/id_rsa
 		echo "This is your SSH key. Select all and copy to your clipboard. Then, "
 		echo "go to your github and add the ssh key."
-		mousepad ~/.ssh/id_rsa.pub
+		if [ -z $EDITOR ] then
+			cat ~/.ssh/id_rsa.pub
+		else
+			mousepad ~/.ssh/id_rsa.pub
+		fi
 		echo "When you're ready, press enter and we gonna begin testing the SSH."
 		read enter
 		ssh -T git@github.com
@@ -218,13 +180,9 @@ generate_ssh()
 }
 
 case $1 in
-    "-help") help exit;;
-    "-h") show_help exit;;
-    "--h") show_help exit;;
-    "--help") show_help exit;;
-    "-gen-ssh") generate_ssh exit;;
-    "") install_default
-	exit;;
+    "--help") help exit;;
+    "--gen-ssh") generate_ssh exit;;
+    "") install_default exit;;
 esac
 
 echo "System configuration complete."
