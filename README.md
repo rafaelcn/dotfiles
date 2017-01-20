@@ -23,14 +23,11 @@ Applications
 
 __The list of the applications that will be installed when the script is run__
 
- - [x] Xubuntu restricted extras
  - [x] HG (Mercurial)
  - [x] Git
  - [x] Subversion
  - [x] Synaptic Package Manager
  - [x] Emacs
- - [x] virtualenv
- - [x] Compton (X11 compositor)
  - [X] Deluge
 
 __Note: it also generate github ssh keys. Awesome, isn't? Just use:__
