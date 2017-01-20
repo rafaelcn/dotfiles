@@ -1,6 +1,6 @@
 #!/bin/bash
 #: Title	: linux-setup.sh
-#: Date		: 10/13/2014 (MM/DD/YYYY).
+#: Date		: 01/20/2017 (MM/DD/YYYY).
 #: Author	: Rafael C. Nunes <rafaelnunes at engineer dot com>
 #: License	: MIT
 #: Version	: 0.1
@@ -85,22 +85,6 @@ create_folders()
 		mkdir $HOME/HG
     fi
 
-    if [ -d "$HOME/SVN" ]
-    then
-		echo "\"SVN\" folder already exists, skipping..."
-		sleep 1
-    else
-		mkdir $HOME/SVN
-    fi
-
-    if [ -d "$HOME/Databases" ]
-    then
-		echo "\"Databases\" folder already exists, skipping..."
-		sleep 1
-    else
-		mkdir $HOME/Github
-    fi
-
     if [ -d "$HOME/IDEs" ]
     then
 		echo "\"IDEs\" folder already exists, skipping..."
@@ -115,8 +99,10 @@ create_folders()
 	sleep 1
     else
 		mkdir $HOME/Programming
-		mkdir $HOME/Programming/C-C++
+		mkdir $HOME/Programming/C
+		mkdir $HOME/Programming/C++
 		mkdir $HOME/Programming/Lua
+		mkdir $HOME/Programming/Go
     fi
 }
 
@@ -133,17 +119,14 @@ install_default()
 
     install_valgrind
 
-    sudo apt-get install xubuntu-restricted-extras -y -qq
+	# I don't use xubuntu anymore, no reason to leave this functional
+    #sudo apt-get install xubuntu-restricted-extras -y -qq
     sudo apt-get install git -y -qq
     sudo apt-get install mercurial -y -qq
     sudo apt-get install subversion -y -qq
     sudo apt-get install synaptic -y -qq
     sudo apt-get install emacs -y -qq
     sudo apt-get install deluge -y -qq
-
-    pip3 install virtualenv
-
-    install_compton
 }
 
 
@@ -151,16 +134,16 @@ generate_ssh()
 {
 	clear
 	SSH_KEYGEN=`which ssh-keygen`
-	EDITOR=`which mousepad`
-	
+	EDITOR=`which mousepad | which kate`
+
 	if [ -z $SSH_KEYGEN ]
 	then
 		echo "The ssh-keygen program could not be found. It won't be possible to "
 		echo "generate key."
 		return 127
 	else
-    		echo "Generating ssh keys for github..."
-	    	sleep 1
+    	echo "Generating ssh keys for github..."
+	    sleep 1
 		echo "Your email please: "
 		read email
 		$SSH_KEYGEN -t rsa -C "$email"
@@ -168,10 +151,11 @@ generate_ssh()
 		ssh-add ~/.ssh/id_rsa
 		echo "This is your SSH key. Select all and copy to your clipboard. Then, "
 		echo "go to your github and add the ssh key."
-		if [ -z $EDITOR ] then
+		if [ -z $EDITOR ]
+		then
 			cat ~/.ssh/id_rsa.pub
 		else
-			mousepad ~/.ssh/id_rsa.pub
+			$EDITOR ~/.ssh/id_rsa.pub
 		fi
 		echo "When you're ready, press enter and we gonna begin testing the SSH."
 		read enter
