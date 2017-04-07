@@ -1,4 +1,4 @@
-;;
+;; 
 ;; Author: Rafael Campos Nunes
 ;; Email: <rafaelnunes at engineer dot com>
 
@@ -19,7 +19,7 @@
 (global-linum-mode 1)
 
 ;; Wakatime configuration
-(setq wakatime-api-key "<your-api-key>")
+(setq wakatime-api-key "<your_api_key>")
 (setq wakatime-python-bin "/usr/bin/python3")
 
 (global-wakatime-mode 1)
@@ -30,6 +30,10 @@
 (global-set-key (kbd "M-$") 'split-window-right)
 (global-set-key (kbd "M-RET") 'other-window)
 (global-set-key (kbd "M-0") 'delete-window)
+
+;; Setting default style for c/c++ programming languages
+(setq c-default-style "stroustrup")
+(setq c++-default-style "stroustrup")
 
 ;; irony configuration
 (add-hook 'c++-mode-hook 'irony-mode)
