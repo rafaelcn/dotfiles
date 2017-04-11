@@ -18,7 +18,7 @@ LINUX_ARCH=("none")
 if [ $(id -u) -eq 0 ]
 then
     echo "This  script must not be ran with root privileges."
-    echo "That's because your home directory will be used."
+    echo "That's because only your home directory will be used."
     exit
 fi
 
@@ -31,11 +31,7 @@ esac
 
 help()
 {
-    echo.
-    echo.
-    echo "Install the basic stuff that a developer (I) need."
-	echo "doubts about what will be installed checkout:"
-	echo "------------ https://github.com/rafaelcn/dotfiles ------------"
+    echo "------------ https://github.com/rafaelcn/dotfiles ------------"
     echo ""
     echo "Usage: ./linux-setup [options]"
     echo "Options:"
@@ -53,88 +49,11 @@ download_file()
     curl -# -o $1 $2
 }
 
-
-install_valgrind()
-{
-    clear
-    echo "Downloading Valgrind 3.10.1"
-    download_file Valgrind.tar.bz2 valgrind.org/downloads/valgrind-3.10.1.tar.bz2
-
-    tar -fjx Valgrind.tar.bz2
-
-    cd Valgrind
-    ./configure
-    sudo make && make install -j 2
-}
-
-create_folders()
-{
-    if [ -d "$HOME/Github" ]
-    then
-    	echo "\"Github\" folder already exists, skipping..."
-		sleep 1
-    else
-		mkdir $HOME/Github
-    fi
-
-    if [ -d "$HOME/HG" ]
-    then
-		echo "\"Mercurial (HG)\" folder already exists, skipping..."
-		sleep 1
-    else
-		mkdir $HOME/HG
-    fi
-
-    if [ -d "$HOME/IDEs" ]
-    then
-		echo "\"IDEs\" folder already exists, skipping..."
-		sleep 1
-    else
-		mkdir $HOME/IDEs
-    fi
-
-    if [ -d "$HOME/Programming" ]
-    then
-		echo "\"Programming\" folder already exists, skipping..."
-	sleep 1
-    else
-		mkdir $HOME/Programming
-		mkdir $HOME/Programming/C
-		mkdir $HOME/Programming/C++
-		mkdir $HOME/Programming/Lua
-		mkdir $HOME/Programming/Go
-    fi
-}
-
-install_default()
-{
-    echo ""
-    echo "System architecture: $LINUX_ARCH."
-    echo ""
-    echo "This installation may take a while, sit back and enjoy."
-    sleep 2
-
-    # My linux $HOME path has some additional folders
-    create_folders
-
-    install_valgrind
-
-	# I don't use xubuntu anymore, no reason to leave this functional
-    #sudo apt-get install xubuntu-restricted-extras -y -qq
-    sudo apt-get install git -y -qq
-    sudo apt-get install mercurial -y -qq
-    sudo apt-get install subversion -y -qq
-    sudo apt-get install synaptic -y -qq
-    sudo apt-get install emacs -y -qq
-    sudo apt-get install deluge -y -qq
-}
-
-
 generate_ssh()
 {
 	clear
 	SSH_KEYGEN=`which ssh-keygen`
-	EDITOR=`which mousepad | which kate`
+	EDITOR=`which mousepad | which kate | which kwrite | which leafpad`
 
 	if [ -z $SSH_KEYGEN ]
 	then
@@ -142,31 +61,37 @@ generate_ssh()
 		echo "generate key."
 		return 127
 	else
-    	echo "Generating ssh keys for github..."
+    	    echo "Generating ssh keys for github..."
 	    sleep 1
-		echo "Your email please: "
-		read email
-		$SSH_KEYGEN -t rsa -C "$email"
-		eval "$(ssh-agent -s)"
-		ssh-add ~/.ssh/id_rsa
-		echo "This is your SSH key. Select all and copy to your clipboard. Then, "
-		echo "go to your github and add the ssh key."
-		if [ -z $EDITOR ]
-		then
-			cat ~/.ssh/id_rsa.pub
-		else
-			$EDITOR ~/.ssh/id_rsa.pub
-		fi
-		echo "When you're ready, press enter and we gonna begin testing the SSH."
-		read enter
-		ssh -T git@github.com
+	    echo "Your email please: "
+	    read email
+	    $SSH_KEYGEN -t rsa -C "$email"
+	    eval "$(ssh-agent -s)"
+	    ssh-add ~/.ssh/id_rsa
+	    echo "This is your SSH key. Select all and copy to your clipboard. Then, "
+	    echo "go to your github and add the ssh key."
+	    if [ -z $EDITOR ]
+	    then
+		cat ~/.ssh/id_rsa.pub
+	    else
+		$EDITOR ~/.ssh/id_rsa.pub
+	    fi
+	    echo "When you're ready, press enter and we gonna begin testing the SSH."
+	    read enter
+	    echo -ne "Testing SSH connection with github servers"
+	    sleep 0.3
+	    echo -ne .
+	    sleep 0.3
+	    echo -ne .
+	    sleep 0.3 
+	    echo .
+	    ssh -T git@github.com
 	fi
 }
 
 case $1 in
     "--help") help exit;;
     "--gen-ssh") generate_ssh exit;;
-    "") install_default exit;;
+    "--gen-gpg") generate_gpg exit;;
+    "") help exit;;
 esac
-
-echo "System configuration complete."
