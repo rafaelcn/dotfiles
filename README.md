@@ -18,18 +18,6 @@ If you already have curl:
 
 __That's it, *simple* as that. Now go and setup your linux environment ;)__
 
-Applications
-===
-
-__The list of the applications that will be installed when the script is run__
-
- - [x] HG (Mercurial)
- - [x] Git
- - [x] Subversion
- - [x] Synaptic Package Manager
- - [x] Emacs
- - [X] Deluge
-
 __Note: it also generate github ssh keys. Awesome, isn't? Just use:__
 
 `./linux-setup.sh -gen-ssh`
