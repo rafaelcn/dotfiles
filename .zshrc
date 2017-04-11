@@ -82,8 +82,16 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# Using vim to edit system/commit files.
+export VISUAL=vim
+export EDITOR="$VISUAL"
+
 export PATH=$PATH:~/Github/brain/bin
 
 # Go lang
 export GOPATH=$HOME/Programming/Go
 export PATH=$PATH:~/Programming/Go/bin
+
+# Resolve issues with my gpg-agent
+GPG_TTY=$(tty)
+export GPG_TTY
