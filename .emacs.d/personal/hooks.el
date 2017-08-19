@@ -34,11 +34,10 @@
                     (or (getenv "CPPFLAGS") "-DDEBUG=9")
                     (or (getenv "CFLAGS") "-pedantic -Wall -g")
                     file))
-       (push (format "gdb --fullname '%s.%s'" file-basename extension)
+       (push (format "gdb --fullname \"%s.%s\"" file-basename extension)
              gud-gud-gdb-history)
        (set (make-local-variable 'gud-gdb-command-name)
-            (format "gdb -i=mi '%s.%s'" file-basename extension))))))
-
+            (format "gdb -i=mi \"%s.%s\"" file-basename extension))))))
 
 ;; add commands for build and debug to C++ and C
 (add-hook 'c-mode-common-hook 'setup-c-and-cpp-compiler-with-gdb)
