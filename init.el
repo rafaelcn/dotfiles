@@ -1,4 +1,4 @@
-;; 
+;;
 ;; Author: Rafael Campos Nunes
 ;; Email: <rafaelnunes at engineer dot com>
 ;;
@@ -26,8 +26,8 @@
 
 ;; Better keys for split/delete windows
 (global-set-key (kbd "M-3") 'delete-other-windows)
-(global-set-key (kbd "M-4") 'split-window-below)
-(global-set-key (kbd "M-$") 'split-window-right)
+(global-set-key (kbd "M-4") 'split-window-right)
+(global-set-key (kbd "M-$") 'split-window-below)
 (global-set-key (kbd "M-RET") 'other-window)
 (global-set-key (kbd "M-0") 'delete-window)
 
