@@ -1,4 +1,6 @@
-_.dotfiles_
+# _.dotfiles_
 ===========
 
-Files that I use on almost every unix base system that I have.
+![works badge](https://cdn.rawgit.com/nikku/works-on-my-machine/v0.2.0/badge.svg)
+
+It may not work on your machine, beware.
