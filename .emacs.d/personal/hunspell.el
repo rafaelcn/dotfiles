@@ -5,6 +5,7 @@
 (require 'ispell)
 
 (defvar --additional-extension "")
+
 (when (eq system-type 'windows-nt)
   (setq --additional-extension ".exe"))
 
@@ -12,7 +13,8 @@
 
 (defvar aspell-name (format "aspell%s" --additional-extension))
 
-(defvar hunspell-exists (file-exists-p (or (executable-find hunspell-name) "/not/found/")))
+(defvar hunspell-exists (file-exists-p
+                         (or (executable-find hunspell-name) "/not/found/")))
 
 (defvar default-spell-program hunspell-name)
 (defvar hunspell-dict "en_US,pt_BR")
