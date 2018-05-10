@@ -1,14 +1,19 @@
+;; File custom.el
+;; Sets a lot of configurations that I commonly use on my emacs
+
 ;; To view the column index
 (column-number-mode 1)
 ;; To view line numbers
 (global-linum-mode 1)
 ;; Setting the default font
 (set-frame-font "Ubuntu Mono 11" nil t)
+;; Set tab width to four
+(setq-default tab-width 4)
 ;; Org support for shift select
 (setq org-support-shift-select 1)
 ;; Wakatime mode
 (if (package-installed-p 'wakatime-mode)
-    (setq wakatime-api-key "<your api-key>"))
+    (setq wakatime-api-key "<your api-key"))
 
 (if (package-installed-p 'wakatime-mode)
     (global-wakatime-mode 1))
@@ -35,6 +40,11 @@
 
   (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
 
+;; toc-org stuff
+(if (require 'toc-org nil t)
+    (add-hook 'org-mode-hook 'toc-org-enable)
+  (warn "toc-org not found"))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -45,15 +55,19 @@
  '(company-quickhelp-color-background "#4F4F4F")
  '(company-quickhelp-color-foreground "#DCDCCC")
  '(custom-enabled-themes (quote (manoj-dark)))
+ '(exec-path-from-shell-arguments (quote ("-l")))
  '(fci-rule-color "#383838")
  '(nrepl-message-colors
    (quote
     ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
  '(package-selected-packages
    (quote
-    (lua-mode csharp-mode company-irony company-c-headers cmake-mode yaml-mode markdown-mode company wakatime-mode zop-to-char zenburn-theme which-key volatile-highlights undo-tree smartrep smartparens smart-mode-line operate-on-number move-text magit projectile ov imenu-anywhere guru-mode grizzl god-mode gitignore-mode gitconfig-mode git-timemachine gist flycheck expand-region epl editorconfig easy-kill diminish diff-hl discover-my-major dash crux browse-kill-ring beacon anzu ace-window)))
+    (exec-path-from-shell toc-org slime lua-mode csharp-mode company-irony company-c-headers cmake-mode yaml-mode markdown-mode company wakatime-mode zop-to-char zenburn-theme which-key volatile-highlights undo-tree smartrep smartparens smart-mode-line operate-on-number move-text magit projectile ov imenu-anywhere guru-mode grizzl god-mode gitignore-mode gitconfig-mode git-timemachine gist flycheck expand-region epl editorconfig easy-kill diminish diff-hl discover-my-major dash crux browse-kill-ring beacon anzu ace-window)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
- '(safe-local-variable-values (quote ((flycheck-disabled-checkers emacs-lisp-checkdoc))))
+ '(safe-local-variable-values
+   (quote
+    ((checkdoc-minor-mode . t)
+     (flycheck-disabled-checkers emacs-lisp-checkdoc))))
  '(vc-annotate-background "#2B2B2B")
  '(vc-annotate-color-map
    (quote
@@ -78,7 +92,6 @@
  '(vc-annotate-very-old-color "#DC8CC3")
  '(wakatime-cli-path "/home/ranu/.local/bin/wakatime")
  '(wakatime-python-bin nil))
-
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
