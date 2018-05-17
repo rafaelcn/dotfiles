@@ -82,16 +82,9 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# Using vim to edit system/commit files.
-export VISUAL=vim
-export EDITOR="$VISUAL"
+# Useful alias for xclip
+alias xcopy="xclip -sel clipboard"
+alias xpaste="xclip -o -sel clipboard"
 
-export PATH=$PATH:~/Github/brain/bin
-
-# Go lang
-export GOPATH=$HOME/Programming/Go
-export PATH=$PATH:~/Programming/Go/bin
-
-# Resolve issues with my gpg-agent
-GPG_TTY=$(tty)
-export GPG_TTY
+# OPAM configuration
+. /home/ranu/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
