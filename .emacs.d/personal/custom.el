@@ -6,21 +6,22 @@
 ;; To view line numbers
 (global-linum-mode 1)
 ;; Setting the default font
-(set-frame-font "Ubuntu Mono 11" nil t)
+(set-frame-font "Go Mono 11" nil t)
 ;; Set tab width to four
 (setq-default tab-width 4)
 ;; Org support for shift select
-(setq org-support-shift-select 1)
+(setq-default org-support-shift-select 1)
 ;; Wakatime mode
-(if (package-installed-p 'wakatime-mode)
-    (setq wakatime-api-key "<your api-key"))
+(if (package-installed-p 'wakatime-mode))
 
 (if (package-installed-p 'wakatime-mode)
-    (global-wakatime-mode 1))
+    (setq-default wakatime-api-key "<your api-key>"
+                  lobal-wakatime-mode 1)
+  (package-install 'wakatime-mode))
 
 ;; Setting default style for c/c++ programming languages
-(setq c-default-style "stroustrup")
-(setq c++-default-style "stroustrup")
+(setq-default c-default-style "stroustrup")
+(setq-default c++-default-style "stroustrup")
 
 (with-eval-after-load 'flycheck
   (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
@@ -38,12 +39,15 @@
   (add-hook 'c-mode-hook 'irony-mode)
   (add-hook 'objc-mode-hook 'irony-mode)
 
-  (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
+  (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+  (package-install 'company))
 
 ;; toc-org stuff
-(if (require 'toc-org nil t)
-    (add-hook 'org-mode-hook 'toc-org-enable)
-  (warn "toc-org not found"))
+(if (package-installed-p 'toc-org)
+    (if (require 'toc-org nil t)
+        (add-hook 'org-mode-hook 'toc-org-enable)
+      (warn "toc-org not found"))
+  (package-install 'toc-org))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
