@@ -12,11 +12,10 @@
 ;; Org support for shift select
 (setq-default org-support-shift-select 1)
 ;; Wakatime mode
-(if (package-installed-p 'wakatime-mode))
-
 (if (package-installed-p 'wakatime-mode)
-    (setq-default wakatime-api-key "<your api-key>"
-                  lobal-wakatime-mode 1)
+    (progn
+      (setq-default wakatime-api-key "<your api-key>")
+      (global-wakatime-mode))
   (package-install 'wakatime-mode))
 
 ;; Setting default style for c/c++ programming languages
@@ -32,14 +31,15 @@
 
 ;; company-irony configuration
 (if (package-installed-p 'company)
-    (eval-after-load 'company
-      '(add-to-list 'company-backends 'company-irony))
+    (progn
+      (eval-after-load 'company
+        '(add-to-list 'company-backends 'company-irony))
 
-  (add-hook 'c++-mode-hook 'irony-mode)
-  (add-hook 'c-mode-hook 'irony-mode)
-  (add-hook 'objc-mode-hook 'irony-mode)
+      (add-hook 'c++-mode-hook 'irony-mode)
+      (add-hook 'c-mode-hook 'irony-mode)
+      (add-hook 'objc-mode-hook 'irony-mode)
 
-  (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+      (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
   (package-install 'company))
 
 ;; toc-org stuff
