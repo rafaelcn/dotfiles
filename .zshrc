@@ -64,7 +64,7 @@ fi
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 # Source the aliases file
-source .aliases.sh
+source .alias.sh
 
 # OPAM configuration
 . /home/ranu/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
