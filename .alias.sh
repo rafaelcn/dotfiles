@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 #
 # Rafael Campos Nunes <rafaelnunes@engineer.com>
 
