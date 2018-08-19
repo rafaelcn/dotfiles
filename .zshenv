@@ -5,6 +5,7 @@ export PATH=$PATH:~/Github/brain/bin
 export PATH=$PATH:~/Programming/Go/bin
 export PATH=$PATH:~/.local/bin
 
+export PATH=$PATH:/usr/local/go/bin
 export GOPATH=~/Programming/Go
 
 # Using vim to edit system/commit files
