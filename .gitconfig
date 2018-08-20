@@ -1,0 +1,10 @@
+[user]
+	email = rafaelnunes@engineer.com
+	name = Rafael Campos Nunes
+    signingkey = 0803154E
+[push]
+    default = matching
+[commit]
+	gpgsign = true
+[credential]
+    helper = cache --timeout=7200
