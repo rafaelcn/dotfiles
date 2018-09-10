@@ -1,12 +1,8 @@
-#!/usr/bin/bash
+#!/bin/bash
 #
 # Rafael Campos Nunes <rafaelnunes@engineer.com>
-
-if [ ! -e /usr/bin/sudo ]; then
-    echo "You must have the force to execute this script."
-    echo "You should have sudo, or modify this script to work as you please."
-    exit 1
-fi
+#
+#
 
 S="sudo"
 DIST=`cat /etc/issue | cut -d ' ' -f 1`
@@ -21,12 +17,19 @@ config_emacs() {
     tar xf emacs-26.1.tar.xz
     cd emacs-26.1
     configure ./
-    make && make install
 
-    cd ~/
-    git clone https://github.com/bbatsov/prelude
-    cp Github/dotfiles/.emacs.d ./ -r
+    if [ $? -eq 0 ]; then
+        make && make install
+
+        cd ~/
+        git clone https://github.com/bbatsov/prelude
+        cp Github/dotfiles/.emacs.d ./ -r
+    fi
+
+    # TODO: Autofix the missing dependencies
+    echo "Download all the dependencies that Emacs need to be compiled."
 }
+
 
 # Package manager and some variables are set to work with the Debian derivatives
 # and will change if the system is not a Debian bases system.
@@ -39,21 +42,32 @@ if [ -e /usr/bin/pacman ]; then
 fi
 
 if [ ! -e /usr/bin/git ]; then
-    printf "You need git to run this script. Sorry kiddo.\n"
-    exit 1
+    echo "You'll need git, let me install it for you.\n"
+    $S $PM install git
 fi
 
+mkdir -p Github && cd Github
+git clone https://github.com/rafaelcn/dotfiles
+
+cp .gitconfig ~/
 
 printf "Your distribution is $DIST and it uses $PM as its package manager. (PRESS ENTER TO CONTINUE)\n"
 read
 
-# Non portable between distributions I think
-$S $PM $INSTALL vim zsh sdl2-dev glm ruby
+JEKYLL=ruby
+SDL2=libsdl2-dev libsdl2-image-dev libsdl2-ttf-dev libsdl2-mixer-dev
+DEPS=libtiff-dev libpng-dev libjpeg-dev libgtk-3-dev libpng-dev libgif-dev
+GENERAL=software-properties-common python-software-properties
+DEV_TOOLS=cmake glm zsh vim g++ gdb valgrind ocaml clang llvm
 
-# TODO: Configure and install Jekyll and other stuff I don't have in my head right now
+PACKAGES=$JEKYLL $SDL2 $DEV_TOOLS $DEPS
 
-mkdir -p Github && cd Github
-git clone https://github.com/rafaelcn/dotfiles
+PYTHON=wakatime
+
+# Non portable between distributions I think because of package naming
+$S $PM $INSTALL $PACKAGES
+# Install wakatime package
+$S pip install $PYTHON
 
 read -p "Install and configure emacs? (y/n)" EMACS
 
