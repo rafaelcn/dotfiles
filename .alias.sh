@@ -17,5 +17,8 @@ alias xcopy="xclip -sel clipboard"
 alias xpaste="xclip -o -sel clipboard"
 
 # Export gpg keys
-alias export_keys=gpg --output - --export-secret-keys 0803154E > pubkey.gpg |
-    gpg --armor --output keys.asc --symmetric --chipher-algo AES56
+#alias export_keys=gpg --output - --export-secret-keys 0803154E > pubkey.gpg |
+#    gpg --armor --output keys.asc --symmetric --chipher-algo AES56
+
+alias decrypt=gpg --decrypt
+alias sencrypt=gpg --symmetric --encrypt
