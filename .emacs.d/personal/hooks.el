@@ -42,4 +42,8 @@
 ;; add commands for build and debug to C++ and C
 (add-hook 'c-mode-common-hook 'setup-c-and-cpp-compiler-with-gdb)
 
+(add-hook 'css-mode-hook
+          (function(lambda()
+                     (setq tab-width 2))))
+
 ;;; hooks.el ends here
