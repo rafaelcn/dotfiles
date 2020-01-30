@@ -12,8 +12,7 @@ config_emacs() {
         $PM $INSTALL wget
     fi
 
-    wget http://ftp.gnu.org/gnu/emacs/emacs-26.1.tar.xz --show-progress \
-         --progress=bar
+    wget http://ftp.gnu.org/gnu/emacs/emacs-26.1.tar.xz --progress=bar
     tar xf emacs-26.1.tar.xz
     cd emacs-26.1
     configure ./
@@ -26,7 +25,7 @@ config_emacs() {
         cp Github/dotfiles/.emacs.d ./ -r
     fi
 
-    # TODO: Autofix the missing dependencies
+    # TODO: Fix the missing dependencies
     echo "Download all the dependencies that Emacs need to be compiled."
 }
 
@@ -62,8 +61,9 @@ main() {
     DEPS=libtiff-dev libpng-dev libjpeg-dev libgtk-3-dev libpng-dev libgif-dev
     GENERAL=software-properties-common python-software-properties
     DEV_TOOLS=curl cmake glm zsh vim g++ gdb valgrind ocaml clang-6.0 llvm-6.0 \
-             llvm-6.0-dev llvm-6.0-tools \
-             python3-pip python-pip wget
+             llvm-6.0-dev llvm-6.0-tools openssh-client openssh-server arp-scan\
+             python3-pip python-pip wget cifs-utils python3-dev erlang rust \
+
 
     PACKAGES=$JEKYLL $SDL2 $DEV_TOOLS $DEPS
 
