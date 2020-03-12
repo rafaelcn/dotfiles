@@ -22,3 +22,6 @@ alias xpaste="xclip -o -sel clipboard"
 
 alias decrypt=gpg --decrypt
 alias sencrypt=gpg --symmetric --encrypt
+
+# A known bug https://askubuntu.com/questions/779892/16-04-cant-use-bluetooth-a2dp-headphones-pairs-but-does-not-connect-logs-insi
+alias headphones='sudo rmmod btusb ; sudo modprobe btusb'
