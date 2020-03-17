@@ -7,7 +7,6 @@ S="sudo"
 DIST=`cat /etc/issue | cut -d ' ' -f 1`
 
 config_emacs() {
-
     if [ ! -e /usr/bin/wget ]; then
         $PM $INSTALL wget
     fi
@@ -63,9 +62,9 @@ main() {
     DEV_TOOLS=curl cmake glm zsh vim g++ gdb valgrind ocaml clang-6.0 llvm-6.0 \
              llvm-6.0-dev llvm-6.0-tools openssh-client openssh-server arp-scan\
              python3-pip python-pip wget cifs-utils python3-dev erlang rust \
+    SYS_TOOLS=rmlint dstat atop
 
-
-    PACKAGES=$JEKYLL $SDL2 $DEV_TOOLS $DEPS
+    PACKAGES=$JEKYLL $SDL2 $DEV_TOOLS $SYS_TOOLS $DEPS
 
     PYTHON_PACKAGES=wakatime
 
@@ -76,7 +75,7 @@ main() {
 
     read -p "Install and configure emacs? (y/n)" EMACS
 
-    if [ $EMACS -eq "y"  ]; then
+    if [ $EMACS -eq "y" ]; then
         config_emacs
     fi
 
