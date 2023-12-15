@@ -1,0 +1,11 @@
+alias k=kubectl
+alias v=nvim
+alias d=docker
+
+alias es='emacs --daemon'
+alias et='emacsclient -nw'
+alias eg='emacsclient -c &'
+alias ek='emacsclient -e "(kill-emacs)"'
+
+alias encrypt='gpg --symmetric --encrypt'
+alias decrypt='gpg --decrypt'
