@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Rafael Campos Nunes <rafaelnunes@engineer.com>
+# Rafael Campos Nunes <rcamposnunes@outlook.com>
 
 if [ -e /usr/bin/pacman ]; then
     alias pacman-install='sudo pacman -S'
