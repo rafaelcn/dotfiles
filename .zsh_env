@@ -1,0 +1,9 @@
+export PATH=$PATH:/home/ranu/.bin
+export PATH=$PATH:/home/ranu/.linuxbrew/bin
+
+export PATH=$PATH:/usr/local/go/bin/
+export PATH=$PATH:$HOME/Programming/go/bin
+
+export GOPATH=$HOME/Programming/go
+
+
