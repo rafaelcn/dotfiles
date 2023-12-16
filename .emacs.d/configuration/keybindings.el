@@ -1,6 +1,9 @@
 ;;
 ;; Personal keymap
 ;;
+;; This is general stuff, there might be other keybindings defined in other files,
+;; particularly the languages.el file.
+;;
 
 (global-set-key (kbd "M-<right>") 'split-window-horizontally)
 (global-set-key (kbd "M-<down>") 'split-window-vertically)
@@ -23,6 +26,12 @@
 		(lambda () (interactive)
 		  (disable-theme 'zweilight)
 		  (enable-theme 'exotica)))
+
+(global-set-key (kbd "C-/")
+				'comment-region)
+
+(global-set-key (kbd "C-?")
+				'uncomment-region)
 
 
 (defun walk-buffers ()
