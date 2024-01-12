@@ -12,8 +12,7 @@
 
 (setq inhibit-startup-message t
       initial-scratch-message "Type me..."
-      cursor-type 'bar
-      tab-width 4)
+      cursor-type 'bar)
 
 (setq backup-directory-alist '(("." . "~/.emacs.d/backup"))
       backup-by-copying t   ; don't delink hard links
@@ -22,8 +21,19 @@
       kept-old-versions 5
       kept-new-versions 20)
 
+(setq-default tab-width 4
+			  auto-save-default t)
 
-(set-frame-font "Noto Sans Mono 10" nil t)
+(setq default-frame-alist '((font . "Noto Sans Mono 10")))
 
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
+
+;; Smoooooooth
+
+(use-package smooth-scrolling
+  :ensure
+  :config
+  (progn
+	(smooth-scrolling-mode 1)
+	(setq smooth-scroll-margin 2)))
 
