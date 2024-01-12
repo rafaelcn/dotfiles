@@ -1,36 +1,44 @@
 ;;
-;; Package related configuration
+;; Packages related configuration
 ;;
-
-(global-wakatime-mode)
-
-(add-to-list 'load-path "~/Documents/Github/helm")
 
 (require 'smooth-scrolling)
 (require 'helm)
 (require 'helm-autoloads)
 (require 'lsp-mode)
+(require 'flycheck)
+(require 'dap-mode)
+(require 'wakatime-mode)
+
+(global-wakatime-mode)
+
+(add-to-list 'load-path "~/Documents/Github/helm")
 
 (smooth-scrolling-mode 1)
 (setq
  smooth-scroll-margin 2)
 
-(helm-mode 1)
+;; Company
 
 (use-package company
   :ensure t
   :config
   (progn
-    (add-hook 'after-initial-hook 'global-company-mode)))
+    (add-hook 'after-initial-hook 'global-company-mode))
+  :bind
+  (:map company-active-map
+		("C-n". company-select-next)
+		("C-p". company-select-previous)
+		("M-<". company-select-first)
+		("M->". company-select-last)))
 
-(progn
-  (setq gofmt-command "goimports")                ; goimports imports missing deps and formats your code
-  (add-hook 'before-save-hook 'gofmt-before-save) ; it uses the gofmt-before-save command from gomode
-  (add-hook 'go-mode-hook #'lsp-deferred)
-  (add-hook 'go-mode-hook 'display-line-numbers-mode))
+;; Helm
 
+(helm-mode 1)
 
+(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
 
+;; Flycheck
 
-
-
+(use-package flycheck
+  :ensure t)
