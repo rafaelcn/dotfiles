@@ -33,10 +33,3 @@
 (global-set-key (kbd "C-?")
 				'uncomment-region)
 
-
-(defun walk-buffers ()
-  "A function to change back and forth a buffer from a frame"
-  
-  )
-
-

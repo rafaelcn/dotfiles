@@ -31,4 +31,5 @@
 (load-file "~/.emacs.d/configuration/utilities.el")
 (load-file "~/.emacs.d/configuration/theme.el")
 (load-file "~/.emacs.d/configuration/keybindings.el")
+(load-file "~/.emacs.d/configuration/languages.el")
 
