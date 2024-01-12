@@ -17,15 +17,15 @@
 ;; (keymap-global-set "C-<right>" ')
 
 (global-set-key (kbd "C-<f1>")
-		(lambda () (interactive)
-		  (disable-theme 'exotica)
-		  (enable-theme 'zweilight t)))
+				(lambda () (interactive)
+				  (disable-theme 'exotica)
+				  (enable-theme 'zweilight t)))
 
 
 (global-set-key (kbd "C-<f2>")
-		(lambda () (interactive)
-		  (disable-theme 'zweilight)
-		  (enable-theme 'exotica)))
+				(lambda () (interactive)
+				  (disable-theme 'zweilight)
+				  (enable-theme 'exotica)))
 
 (global-set-key (kbd "C-/")
 				'comment-region)
