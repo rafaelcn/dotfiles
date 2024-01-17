@@ -11,18 +11,18 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 (setopt inhibit-startup-message t
-	initial-scratch-message ";; Type me..."
-	cursor-type 'bar
-	tab-width 4
-	auto-save-default t
-	default-frame-alist '((font . "Noto Sans Mono 10")))
+		initial-scratch-message ";; Type me..."
+		cursor-type 'bar
+		tab-width 4
+		auto-save-default t
+		default-frame-alist '((font . "Noto Sans Mono 10")))
 
 (setopt backup-directory-alist '(("." . "~/.emacs.d/backup"))
-	backup-by-copying t   ; don't delink hard links
-	version-control t     ; use version numbers on backups
-	delete-old-versions t ; automatically delete excess backups
-	kept-old-versions 5
-	kept-new-versions 20)
+		backup-by-copying t   ; don't delink hard links
+		version-control t     ; use version numbers on backups
+		delete-old-versions t ; automatically delete excess backups
+		kept-old-versions 5
+		kept-new-versions 20)
 
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 (add-hook 'prog-mode-hook 'flycheck-mode)
