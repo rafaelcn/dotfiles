@@ -5,7 +5,7 @@
 ;; Rust
 
 (use-package rustic
-  :ensure t
+  :ensure
   :init
   (setq rustic-lsp-client 'lsp-mode)
   :bind (:map rustic-mode-map
@@ -20,9 +20,9 @@
   :config
   ;; uncomment for less flashiness
   (setq lsp-rust-analyzer-cargo-watch-command "clippy")
-  (setq lsp-eldoc-hook nil)
-  (setq lsp-enable-symbol-highlighting nil)
-  (setq lsp-signature-auto-activate nil)
+  (setq lsp-eldoc-hook t)
+  (setq lsp-enable-symbol-highlighting t)
+  (setq lsp-signature-auto-activate t)
   (setq lsp-inlay-hint-enable t)
   ;; comment to disable rustfmt on save
   (setq rustic-format-on-save t)
@@ -38,10 +38,9 @@
 
 (use-package go-mode
   :ensure
-  :bind (:map go-mode-map
-			  ("C-." . 'godef-jump)
-			  ("C-," . 'godef-jump-other-window))
   :config
+  (setq lsp-inlay-hint-enable t)
+  
   (progn
 	(setq gofmt-command "goimports")                ; goimports imports missing deps and formats your code
 	(add-hook 'before-save-hook 'gofmt-before-save) ; it uses the gofmt-before-save command from gomode

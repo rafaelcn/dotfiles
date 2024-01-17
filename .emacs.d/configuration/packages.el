@@ -4,8 +4,6 @@
 
 ;; DAP mode
 
-;; TODO: needs configuration
-
 (use-package dap-mode
   :ensure)
 
