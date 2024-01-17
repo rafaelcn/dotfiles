@@ -18,7 +18,6 @@
               ("C-c C-c Q" . lsp-workspace-shutdown)
               ("C-c C-c s" . lsp-rust-analyzer-status))
   :config
-  ;; uncomment for less flashiness
   (setq lsp-rust-analyzer-cargo-watch-command "clippy")
   (setq lsp-eldoc-hook t)
   (setq lsp-enable-symbol-highlighting t)
@@ -40,6 +39,7 @@
   :ensure
   :config
   (setq lsp-inlay-hint-enable t)
+  (setq lsp-eldoc-hook nil)
   
   (progn
 	(setq gofmt-command "goimports")                ; goimports imports missing deps and formats your code
