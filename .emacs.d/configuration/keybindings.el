@@ -19,7 +19,7 @@
 (global-set-key (kbd "C-<f1>")
 				(lambda () (interactive)
 				  (disable-theme 'exotica)
-				  (enable-theme 'zweilight t)))
+				  (enable-theme 'zweilight)))
 
 
 (global-set-key (kbd "C-<f2>")
