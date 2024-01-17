@@ -12,8 +12,7 @@
 (use-package wakatime-mode
   :ensure
   :config
-  (progn
-	(add-hook 'after-initial-hook 'global-wakatime-mode)))
+  (add-hook 'after-initial-hook 'global-wakatime-mode))
 
 ;; Company
 
@@ -22,8 +21,7 @@
   :custom
   (company-idle-delay 0.10)
   :config
-  (progn
-    (add-hook 'after-initial-hook 'global-company-mode))
+  (add-hook 'after-initial-hook 'global-company-mode)
   :bind
   (:map company-active-map
 		("C-n". company-select-next)
@@ -36,14 +34,14 @@
 (use-package helm
   :ensure
   :config
-  (progn
-	(add-hook 'after-initial-hook 'helm-mode)))
-
-(require 'helm-autoloads) ;; check this (unavailable from MELPA (maybe within the source itself)
+  (add-hook 'after-initial-hook 'helm-mode)
+  :bind
+  (:map helm-map
+		("<tab>". helm-execute-persistent-action)))
 
 (add-to-list 'load-path "~/Documents/Github/helm")
 
-(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+(require 'helm-autoloads) ;; check this (unavailable from MELPA (maybe within the source itself)
 
 ;; LSP
 
