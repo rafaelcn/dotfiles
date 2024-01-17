@@ -2,7 +2,6 @@
 ;; Utilities (configuration of emacs itself, excluding keybindings and possibly other stuff)
 ;;
 
-;; user interface improvements
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
@@ -27,6 +26,7 @@
 (setq default-frame-alist '((font . "Noto Sans Mono 10")))
 
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
+(add-hook 'prog-mode-hook 'flycheck-mode)
 
 ;; Smoooooooth
 
