@@ -28,8 +28,8 @@
   (:map company-active-map
 		("C-n". company-select-next)
 		("C-p". company-select-previous)
-		("M-<". company-select-first)
-		("M->". company-select-last)))
+		("C-F". company-select-first)
+		("C-L". company-select-last)))
 
 ;; Helm
 
@@ -51,8 +51,9 @@
   :ensure
   :commands lsp
   :custom
+  (lsp-enable-snippet nil)
   (lsp-eldoc-render-all nil)
-  (lsp-idle-delay 0.30)
+  (lsp-idle-delay 0.20)
   :config
   (add-hook 'lsp-mode-hook 'lsp-ui-mode))
 
@@ -73,4 +74,6 @@
 ;; Flycheck
 
 (use-package flycheck
-  :ensure)
+  :ensure
+  :config
+  (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
