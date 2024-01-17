@@ -10,5 +10,4 @@
 (use-package twilight-bright-theme)
 (use-package twilight-anti-bright-theme)
 
-
 ;; the behaviour of a theme might be controlled by what's defined within the keybindings.el file.
