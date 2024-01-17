@@ -40,11 +40,10 @@
   :config
   (setq lsp-inlay-hint-enable t)
   (setq lsp-eldoc-hook nil)
+  (setq gofmt-command "goimports") ; goimports imports missing deps and formats your code
   
-  (progn
-	(setq gofmt-command "goimports")                ; goimports imports missing deps and formats your code
-	(add-hook 'before-save-hook 'gofmt-before-save) ; it uses the gofmt-before-save command from gomode
-	(add-hook 'go-mode-hook #'lsp-deferred)))
+  (add-hook 'before-save-hook 'gofmt-before-save) ; it uses the gofmt-before-save command from gomode
+  (add-hook 'go-mode-hook #'lsp-deferred))
 
 
 
