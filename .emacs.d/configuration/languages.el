@@ -46,4 +46,12 @@
   (add-hook 'go-mode-hook #'lsp-deferred))
 
 
+;; Java
+
+(use-package lsp-java
+  :ensure
+  :config
+  (add-hook 'java-mode-hook #'lsp)
+  (add-hook 'java-mode-hook #'lsp-lens-mode)
+  (add-hook 'java-mode-hook #'lsp-java-boot-lens-mode))
 
