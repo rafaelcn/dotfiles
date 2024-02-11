@@ -12,7 +12,7 @@
 
 (setopt inhibit-startup-message t
 		initial-scratch-message ";; Type me..."
-		cursor-type 'bar
+		cursor-type 'box
 		tab-width 4
 		auto-save-default t
 		default-frame-alist '((font . "Noto Sans Mono 10")))
@@ -33,6 +33,12 @@
 (use-package smooth-scrolling
   :ensure
   :config
-  (smooth-scrolling-mode 1)
-  (setq-default smooth-scroll-margin 2))
+  (smooth-scrolling-mode)
+  (setq-default smooth-scroll-margin 3))
 
+;; Org
+
+(use-package org
+  :ensure
+  :config
+  (setq-default org-support-shift-select t))
