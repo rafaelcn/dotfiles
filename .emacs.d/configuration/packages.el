@@ -5,14 +5,21 @@
 ;; DAP mode
 
 (use-package dap-mode
-  :ensure)
+  :ensure
+  :after
+  lsp-mode
+  :config
+  (dap-auto-configure-mode))
+
+(use-package dap-java
+  :ensure nil)
 
 ;; Wakatime
 
 (use-package wakatime-mode
   :ensure
   :config
-  (add-hook 'after-initial-hook 'global-wakatime-mode))
+  (global-wakatime-mode))
 
 ;; Company
 
@@ -21,7 +28,7 @@
   :custom
   (company-idle-delay 0.10)
   :config
-  (add-hook 'after-initial-hook 'global-company-mode)
+  (global-company-mode)
   :bind
   (:map company-active-map
 		("C-n". company-select-next)
@@ -34,7 +41,7 @@
 (use-package helm
   :ensure
   :config
-  (add-hook 'after-initial-hook 'helm-mode)
+  (helm-mode)
   :bind
   (:map helm-map
 		("<tab>". helm-execute-persistent-action)))
