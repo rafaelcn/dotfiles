@@ -6,10 +6,18 @@
 
 (use-package dap-mode
   :ensure
-  :after
-  lsp-mode
+  :after lsp-mode
+  :functions dap-hydra/nil
   :config
-  (dap-auto-configure-mode))
+  (dap-auto-configure-mode)
+  (require 'dap-java)
+  :bind (:map lsp-mode-map
+			  ("<f5>" . dap-debug)
+			  ("M-<f5>" . dap-hydra))
+  :hook ((dap-mode . dap-ui-mode)
+		 (dap-session-created . (lambda (&_rest) (dap-hydra)))
+		 (dap-terminated . (lambda (&_rest) (dap-hydra/nil)))))
+  
 
 (use-package dap-java
   :ensure nil)
@@ -18,33 +26,27 @@
 
 (use-package wakatime-mode
   :ensure
-  :config
-  (global-wakatime-mode))
+  :config (global-wakatime-mode))
 
 ;; Company
 
 (use-package company
   :ensure
-  :custom
-  (company-idle-delay 0.10)
-  :config
-  (global-company-mode)
-  :bind
-  (:map company-active-map
-		("C-n". company-select-next)
-		("C-p". company-select-previous)
-		("C-F". company-select-first)
-		("C-L". company-select-last)))
+  :custom (company-idle-delay 0.10)
+  :config (global-company-mode)
+  :bind (:map company-active-map
+			  ("C-n". company-select-next)
+			  ("C-p". company-select-previous)
+			  ("C-F". company-select-first)
+			  ("C-L". company-select-last)))
 
 ;; Helm
 
 (use-package helm
   :ensure
-  :config
-  (helm-mode)
-  :bind
-  (:map helm-map
-		("<tab>". helm-execute-persistent-action)))
+  :config (helm-mode)
+  :bind (:map helm-map
+			  ("<tab>". helm-execute-persistent-action)))
 
 (add-to-list 'load-path "~/Documents/Github/helm")
 

@@ -10,6 +10,8 @@
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+(setopt ring-bell-function 'ignore)
+
 (setopt inhibit-startup-message t
 		initial-scratch-message ";; Type me..."
 		cursor-type 'box
