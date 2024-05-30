@@ -55,3 +55,14 @@
   (add-hook 'java-mode-hook #'lsp-lens-mode)
   (add-hook 'java-mode-hook #'lsp-java-boot-lens-mode))
 
+
+;; C/C++
+;; make sure irony-server is correctly set up after installation (compile it)
+
+(use-package irony
+  :ensure
+  :config
+  (add-hook 'c-mode-hook 'irony-mode)
+  (add-hook 'c++-mode-hook 'irony-mode)
+  (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
+  
