@@ -62,6 +62,8 @@
   (lsp-eldoc-render-all nil)
   (lsp-idle-delay 0.20)
   :config
+  (setq lsp-keep-workspace-alive nil)
+  
   (add-hook 'lsp-mode-hook 'lsp-ui-mode))
 
 (use-package lsp-ui
@@ -84,3 +86,13 @@
   :ensure
   :config
   (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
+
+;; Flymake JSON
+
+(use-package flymake-json
+  :ensure)
+
+;; JSON
+
+(use-package jsonian
+  :ensure)
