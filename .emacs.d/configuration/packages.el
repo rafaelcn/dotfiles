@@ -96,3 +96,11 @@
 
 (use-package jsonian
   :ensure)
+
+;; Orderless
+
+(use-package orderless
+  :ensure
+  :custom
+  (completion--styles '(orderless basic))
+  (completion--category-override '((file (styles basic partial-completion)))))
