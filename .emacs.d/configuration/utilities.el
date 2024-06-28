@@ -44,3 +44,10 @@
   :ensure
   :config
   (setq-default org-support-shift-select t))
+
+;; Java settings
+;; Environment variables need to have an absolute path for some reason...
+
+(setenv "JAVA_HOME" "/home/ranu/.jdks/graalvm-ce-22/")
+(setopt lsp-java-java-path "/home/ranu/.jdks/graalvm-ce-22/bin/java"
+		lsp-java-jdt-download-url "https://download.eclipse.org/jdtls/milestones/1.36.0/jdt-language-server-1.36.0-202405301306.tar.gz")
