@@ -11,6 +11,8 @@
 (global-set-key (kbd "C-t") 'term)
 (global-set-key (kbd "C-x e") 'eval-buffer)
 
+(global-set-key (kbd "<f12>") 'toggle-menu-bar-mode-from-frame)
+
 ;; (keymap-global-set "C-<up>" ')
 ;; (keymap-global-set "C-<down>" ')
 ;; (keymap-global-set "C-<left>" ')
