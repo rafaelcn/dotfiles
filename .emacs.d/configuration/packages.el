@@ -48,7 +48,7 @@
   :bind (:map helm-map
 			  ("<tab>". helm-execute-persistent-action)))
 
-(add-to-list 'load-path "~/Documents/Github/helm")
+;; (add-to-list 'load-path "~/Documents/Github/helm")
 
 (require 'helm-autoloads) ;; check this (unavailable from MELPA (maybe within the source itself)
 
@@ -97,10 +97,10 @@
 (use-package jsonian
   :ensure)
 
-;; Orderless
+;; Projectile
 
-(use-package orderless
+(use-package projectile
   :ensure
-  :custom
-  (completion--styles '(orderless basic))
-  (completion--category-override '((file (styles basic partial-completion)))))
+  :init (projectile-mode)
+  :bind (:map projectile-mode-map
+			  ("C-c p" . projectile-command-map)))
