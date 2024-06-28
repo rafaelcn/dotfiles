@@ -18,11 +18,11 @@
               ("C-c C-c Q" . lsp-workspace-shutdown)
               ("C-c C-c s" . lsp-rust-analyzer-status))
   :config
-  (setq lsp-rust-analyzer-cargo-watch-command "clippy")
-  (setq lsp-eldoc-hook t)
-  (setq lsp-enable-symbol-highlighting t)
-  (setq lsp-signature-auto-activate t)
-  (setq lsp-inlay-hint-enable t)
+  (setopt lsp-rust-analyzer-cargo-watch-command "clippy")
+  (setopt lsp-eldoc-hook t)
+  (setopt lsp-enable-symbol-highlighting t)
+  (setopt lsp-signature-auto-activate t)
+  (setopt lsp-inlay-hint-enable t)
   ;; comment to disable rustfmt on save
   (setq rustic-format-on-save t)
 
@@ -33,14 +33,15 @@
   (when buffer-file-name
     (setq-local buffer-save-without-query t)))
 
+
 ;; Go
 
 (use-package go-mode
   :ensure
   :config
-  (setq lsp-inlay-hint-enable t)
-  (setq lsp-eldoc-hook nil)
-  (setq gofmt-command "goimports") ; goimports imports missing deps and formats your code
+  (setopt lsp-inlay-hint-enable t)
+  (setopt lsp-eldoc-hook nil)
+  (setopt gofmt-command "goimports") ; goimports imports missing deps and formats your code
   
   (add-hook 'before-save-hook 'gofmt-before-save) ; it uses the gofmt-before-save command from gomode
   (add-hook 'go-mode-hook #'lsp-deferred))
@@ -66,3 +67,27 @@
   (add-hook 'c++-mode-hook 'irony-mode)
   (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
   
+
+;; Scala
+
+(use-package scala-mode
+  :ensure
+  :interpreter ("scala" . scala-mode)
+  :config
+  (add-hook 'scala-mode-hook #'lsp)
+  (add-hook 'scala-mode-hook #'lsp-lens-mode))
+
+(use-package sbt-mode
+  :ensure
+  :commands sbt-start sbt-command
+  :config
+  ;; setting to allow spacing in the minibuffer
+  (substitute-key-definition
+   'minibuffer-complete-word
+   'self-insert-command
+   minibuffer-local-completion-map)
+   ;; sbt-supershell kills sbt-mode:  https://github.com/hvesalai/emacs-sbt-mode/issues/152
+   (setq sbt:program-options '("-Dsbt.supershell=false")))
+
+(use-package lsp-metals
+  :ensure)
