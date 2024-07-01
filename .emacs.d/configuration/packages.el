@@ -11,16 +11,13 @@
   :config
   (dap-auto-configure-mode)
   (require 'dap-java)
+  (require 'dap-dlv-go)
   :bind (:map lsp-mode-map
 			  ("<f5>" . dap-debug)
 			  ("M-<f5>" . dap-hydra))
   :hook ((dap-mode . dap-ui-mode)
 		 (dap-session-created . (lambda (&_rest) (dap-hydra)))
 		 (dap-terminated . (lambda (&_rest) (dap-hydra/nil)))))
-  
-
-(use-package dap-java
-  :ensure nil)
 
 ;; Wakatime
 
@@ -42,15 +39,19 @@
 
 ;; Helm
 
-(use-package helm
+;; (use-package helm
+;;   :ensure
+;;   :config (helm-mode)
+;;   :bind (:map helm-map
+;; 			  ("<tab>". helm-execute-persistent-action)))
+
+;;(require 'helm-autoloads) ;; check this (unavailable from MELPA (maybe within the source itself)
+
+;; Vertico
+
+(use-package vertico
   :ensure
-  :config (helm-mode)
-  :bind (:map helm-map
-			  ("<tab>". helm-execute-persistent-action)))
-
-;; (add-to-list 'load-path "~/Documents/Github/helm")
-
-(require 'helm-autoloads) ;; check this (unavailable from MELPA (maybe within the source itself)
+  :config (vertico-mode))
 
 ;; LSP
 
