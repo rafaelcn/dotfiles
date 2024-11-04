@@ -1,8 +1,15 @@
+;; -*- lexical-binding: t; -*-
 ;;
 ;; Packages related configuration
 ;;
 
 ;; DAP mode
+;;
+;; define keybindings for the following functions:
+;;  - dap-step-in
+;;  - dap-step-out
+;;  - dap-breakpoint-add
+;;  - dap-breakpoint-delete
 
 (use-package dap-mode
   :ensure
@@ -14,7 +21,8 @@
   (require 'dap-dlv-go)
   :bind (:map lsp-mode-map
 			  ("<f5>" . dap-debug)
-			  ("M-<f5>" . dap-hydra))
+			  ("M-<f5>" . dap-hydra)
+			  ("M-<f6>" . dap-breakpoint-toggle))
   :hook ((dap-mode . dap-ui-mode)
 		 (dap-session-created . (lambda (&_rest) (dap-hydra)))
 		 (dap-terminated . (lambda (&_rest) (dap-hydra/nil)))))

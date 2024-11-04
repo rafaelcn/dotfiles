@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;;
 ;; Utilities (configuration of emacs itself, excluding keybindings and possibly other stuff)
 ;;
@@ -17,7 +18,7 @@
 		cursor-type 'box
 		tab-width 4
 		auto-save-default t
-		default-frame-alist '((font . "Noto Sans Mono 10")))
+		default-frame-alist '((font . "Iosevka Fixed 10")))
 
 (setopt backup-directory-alist '(("." . "~/.emacs.d/backup"))
 		backup-by-copying t   ; don't delink hard links

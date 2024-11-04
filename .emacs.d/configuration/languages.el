@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;;
 ;; Language related settings (hooks, definitions etc)
 ;;
@@ -93,23 +94,27 @@
   :ensure)
 
 ;; OCaml
-;; make sure to install ocaml-lsp-server ocamlformat
+;; make sure to install ocaml-lsp-server ocamlformat (opam install ...)
+;; 
 
 (use-package merlin
   :ensure)
 
 (use-package tuareg
   :ensure
-  :hook
-  (tuareg-mode . lsp)
   :config
-  (let ((opam-share (ignore-errors (car (process-lines "opam" "var" "share")))))
-	(when (and opam-share (file-directory-p opam-share))
-	  ;; merlin
-	  (add-to-list 'load-path (expand-file-name "emacs/site-list" opam-share))
-	  (autoload 'merlin-mode "merlin" nil t nil)
-	  ;; start merlin in ocaml buffers
-	  (add-hook 'tuareg-mode-hook 'merlin-mode t)
-	  ;; use opam switch to lookup ocamlmerlin binary
-	  (setq merlin-command 'opam))))
+  (add-hook 'tuareg-mode-hook #'lsp-deferred))
+
+(let ((opam-share (ignore-errors (car (process-lines "opam" "var" "share")))))
+  (when (and opam-share (file-directory-p opam-share))
+	;; merlin
+	(add-to-list 'load-path (expand-file-name "emacs/site-list" opam-share))
+	(autoload 'merlin-mode "merlin" nil t nil)
+	;; start merlin in ocaml buffers
+	(add-hook 'tuareg-mode-hook 'merlin-mode t)
+	;; use opam switch to lookup ocamlmerlin binary
+	(setq merlin-command 'opam)))
   
+
+(use-package erlang
+  :ensure)

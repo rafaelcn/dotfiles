@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;;
 ;; Personal keymap
 ;;
@@ -13,6 +14,7 @@
 
 (global-set-key (kbd "<f12>") 'toggle-menu-bar-mode-from-frame)
 
+;; TODO: redefine how I walk on buffers
 ;; (keymap-global-set "C-<up>" ')
 ;; (keymap-global-set "C-<down>" ')
 ;; (keymap-global-set "C-<left>" ')
