@@ -37,8 +37,10 @@
 
 (use-package company
   :ensure
-  :custom (company-idle-delay 0.10)
-  :config (global-company-mode)
+  :custom (company-idle-delay 0.2)
+  :config
+  (add-hook 'eglot-managed-mode-hook 'company-mode)
+  (global-company-mode)
   :bind (:map company-active-map
 			  ("C-n". company-select-next)
 			  ("C-p". company-select-previous)
@@ -112,4 +114,6 @@
   :ensure
   :init (projectile-mode)
   :bind (:map projectile-mode-map
-			  ("C-c p" . projectile-command-map)))
+			  ("C-c p" . projectile-command-map))
+  :config
+  (setq projectile-project-root-files '("go.mod")))
