@@ -22,12 +22,10 @@
 
 (global-set-key (kbd "C-<f1>")
 				(lambda () (interactive)
-				  (disable-theme 'exotica)
-				  (enable-theme 'twilight-bright-theme)))
+				  (disable-theme 'exotica)))
 
 (global-set-key (kbd "C-<f2>")
 				(lambda () (interactive)
-				  (disable-theme 'twilight-bright-theme)
 				  (enable-theme 'exotica)))
 
 (global-set-key (kbd "C-/")
