@@ -59,15 +59,18 @@
 
 
 ;; C/C++
-;; make sure irony-server is correctly set up after installation (compile it)
 
-(use-package irony
-  :ensure
+(use-package eglot
+  :ensure nil
+  :preface
+  (defun config-c++-style()
+	""
+	(c-set-tyle 'stroustrup))
   :config
-  (add-hook 'c-mode-hook 'irony-mode)
-  (add-hook 'c++-mode-hook 'irony-mode)
-  (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
-  
+  (add-hook 'c-mode-hook 'eglot-ensure)
+  (add-hook 'c++-mode-hook 'eglot-ensure)
+  (add-hook 'c++-mode-hook #'config-c++-style))
+
 
 ;; Scala
 
@@ -93,6 +96,7 @@
 (use-package lsp-metals
   :ensure)
 
+
 ;; OCaml
 ;; make sure to install ocaml-lsp-server ocamlformat (opam install ...)
 ;; 
@@ -116,5 +120,33 @@
 	(setq merlin-command 'opam)))
   
 
+;; Elang
+
 (use-package erlang
   :ensure)
+
+;; Treesitter
+
+(use-package treesit
+  :ensure nil
+  :preface
+  (defun treesit-install-language-grammars()
+	(interactive)
+	(dolist (grammars
+			 '((c          "https://github.com/tree-sitter/tree-sitter-c/" "master" "src")
+			   (cpp        "https://github.com/tree-sitter/tree-sitter-cpp/" "v0.23.4" "src")
+			   (glsl       "https://github.com/tree-sitter-grammars/tree-sitter-glsl")
+			   (go         "https://github.com/tree-sitter/tree-sitter-go")
+               (gomod      "https://github.com/camdencheek/tree-sitter-go-mod")
+			   (make       "https://github.com/tree-sitter-grammars/tree-sitter-make")
+			   (ocaml      "https://github.com/tree-sitter/tree-sitter-ocaml" "v0.23.2" "src")
+			   (erlang     "https://github.com/WhatsApp/tree-sitter-erlang" "main" "src")))
+	  (add-to-list 'treesit-language-source-alist grammars)
+	  (unless (treesit-language-available-p (car grammars))
+		(treesit-install-language-grammar (car grammars)))))
+  :config
+  (dolist (mapping '((c-mode   . c-ts-mode)
+					 (c++-mode . c++-ts-mode)
+					 (glsl     . glsl-ts-mode)))
+	(add-to-list 'major-mode-remap-alist mapping))
+  (setq treesit-font-lock-level 4))
