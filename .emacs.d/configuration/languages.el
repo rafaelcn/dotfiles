@@ -61,16 +61,26 @@
 ;; C/C++
 
 (use-package eglot
-  :ensure nil
-  :preface
-  (defun config-c++-style()
-	""
-	(c-set-tyle 'stroustrup))
-  :config
-  (add-hook 'c-mode-hook 'eglot-ensure)
-  (add-hook 'c++-mode-hook 'eglot-ensure)
-  (add-hook 'c++-mode-hook #'config-c++-style))
+  :ensure nil)
 
+(defun config-c-c++-style()
+  ""
+  (eglot-ensure)
+  (c-add-style "r"
+			   '("linux"
+				 (indent-tabs-mode . t)
+				 (c-basic-offset . 4)
+				 (c-offsets-alist
+				  . ((innamespace . +)
+					 (brace-list-intro . 0)
+                     (statement-block-intro . +)
+                     (substatement-open . 0)
+                     (block-open . 0)))))
+  (setq c-default-style  "r"))
+
+(add-hook 'c-mode-common-hook #'config-c-c++-style)
+(add-hook 'c-ts-mode-hook #'config-c-c++-style)
+(add-hook 'c++-ts-mode-hook #'config-c-c++-style)
 
 ;; Scala
 
@@ -120,10 +130,25 @@
 	(setq merlin-command 'opam)))
   
 
-;; Elang
+;; Erlang
 
 (use-package erlang
   :ensure)
+
+;; Web mode
+
+(use-package web-mode
+  :ensure
+  :mode
+  (("\\.html\\'" . web-mode)
+   ("\\.js\\'" . web-mode)
+   ("\\tmpl\\'" . web-mode))
+  :config
+  (setq web-mode-enable-auto-pairing t)
+  (setq web-mode-enable-css-colorization t)
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2))
+
 
 ;; Treesitter
 

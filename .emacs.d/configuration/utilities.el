@@ -18,6 +18,9 @@
 		cursor-type 'box
 		tab-width 4
 		auto-save-default t
+		auto-save-timeout 20
+		auto-save-interval 200
+		auto-save-visited-mode t
 		default-frame-alist '((font . "Iosevka Fixed 10")))
 
 (setopt backup-directory-alist '(("." . "~/.emacs.d/backup"))
