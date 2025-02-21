@@ -21,16 +21,16 @@
 ;; (keymap-global-set "C-<right>" ')
 
 (global-set-key (kbd "C-<f1>")
-				(lambda () (interactive)
-				  (disable-theme 'exotica)))
+		(lambda () (interactive)
+		  (disable-theme 'exotica)))
 
 (global-set-key (kbd "C-<f2>")
-				(lambda () (interactive)
-				  (enable-theme 'exotica)))
+		(lambda () (interactive)
+		  (enable-theme 'exotica)))
 
 (global-set-key (kbd "C-/")
-				'comment-region)
+		'comment-region)
 
 (global-set-key (kbd "C-?")
-				'uncomment-region)
+		'uncomment-region)
 
