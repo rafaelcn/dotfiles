@@ -30,8 +30,10 @@
 ;; Wakatime
 
 (use-package wakatime-mode
-  :ensure
-  :config (global-wakatime-mode))
+  :ensure)
+
+(if (not (eq system-type 'darwin))
+	(global-wakatime-mode))
 
 ;; Company
 
