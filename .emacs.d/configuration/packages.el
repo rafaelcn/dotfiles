@@ -3,6 +3,15 @@
 ;; Packages related configuration
 ;;
 
+
+;; Magit
+;;
+;; The belle of the ball
+
+(use-package magit
+  :ensure)
+
+
 ;; DAP mode
 ;;
 ;; define keybindings for the following functions:
