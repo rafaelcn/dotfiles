@@ -1,6 +1,9 @@
 ;; -*- lexical-binding: t; -*-
 ;;
-;; Utilities (configuration of emacs itself, excluding keybindings and possibly other stuff)
+;; defaults.el
+;; 
+;; Configuration of the defaults on emacs itself, excluding keybindings and
+;; possibly other stuff.
 ;;
 
 (tool-bar-mode -1)
@@ -11,26 +14,23 @@
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-(setopt ring-bell-function 'ignore)
-
-(setopt inhibit-startup-message t
-	initial-scratch-message ";; Type me..."
-	cursor-type 'box
-	tab-width 4
-	auto-save-default t
-	auto-save-timeout 20
-	auto-save-interval 200
-	auto-save-visited-mode t)
-
-(when (not (eq system-type 'darwin))
-  default-frame-alist '((font . "Iosevka Fixed 10")))
+(setopt inhibit-startup-message t	
+		initial-scratch-message ";; Type me..."
+		cursor-type 'box
+		tab-width 4
+		auto-save-default t
+		auto-save-timeout 20
+		auto-save-interval 200
+		auto-save-visited-mode t
+		ring-bell-function 'ignore
+		default-frame-alist '((font . "JetBrains Mono")))
 
 (setopt backup-directory-alist '(("." . "~/.emacs.d/backup"))
-	backup-by-copying t   ; don't delink hard links
-	version-control t     ; use version numbers on backups
-	delete-old-versions t ; automatically delete excess backups
-	kept-old-versions 5
-	kept-new-versions 20)
+		backup-by-copying t   ; don't delink hard links
+		version-control t     ; use version numbers on backups
+		delete-old-versions t ; automatically delete excess backups
+		kept-old-versions 5
+		kept-new-versions 20)
 
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 (add-hook 'prog-mode-hook 'flycheck-mode)

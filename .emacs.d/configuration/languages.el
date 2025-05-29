@@ -1,6 +1,8 @@
 ;; -*- lexical-binding: t; -*-
 ;;
-;; Language related settings (hooks, definitions etc)
+;; languages.el
+;;
+;; Language related settings (hooks, definitions etc).
 ;;
 
 ;; Rust

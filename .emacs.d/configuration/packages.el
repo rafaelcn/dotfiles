@@ -1,6 +1,9 @@
 ;; -*- lexical-binding: t; -*-
 ;;
-;; Packages related configuration
+;; packages.el
+;;
+;; General packages that are not exactly language support, those are inside the
+;; languages.el file.
 ;;
 
 
@@ -128,3 +131,11 @@
 			  ("C-c p" . projectile-command-map))
   :config
   (setq projectile-project-root-files '("go.mod")))
+
+
+;; ORG Roam
+
+(use-package org-roam
+  :ensure
+  :config
+  (setq org-roam-directory (file-truename "~/.emacs.d/org")))

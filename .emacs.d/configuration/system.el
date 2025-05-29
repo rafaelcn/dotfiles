@@ -1,3 +1,9 @@
+;; -*- lexical-binding: t; -*-
+;;
+;; system.el
+;;
+;; This file contains configuration regarding a specific system.
+
 (when (eq system-type 'darwin)
   (use-package exec-path-from-shell
 	:init
