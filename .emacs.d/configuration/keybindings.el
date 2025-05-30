@@ -23,18 +23,6 @@
 ;; (keymap-global-set "C-<left>" ')
 ;; (keymap-global-set "C-<right>" ')
 
-(global-set-key (kbd "C-<f1>")
-				(lambda () (interactive)
-				  (disable-theme 'leuven)
-				  (load-theme 'leuven-dark t)
-				  (enable-theme 'leuven-dark)))
-
-(global-set-key (kbd "C-<f2>")
-				(lambda () (interactive)
-				  (disable-theme 'leuven-dark)
-				  (load-theme 'leuven t)
-				  (enable-theme 'leuven)))
-
 (global-set-key (kbd "C-/")
 		'comment-region)
 
