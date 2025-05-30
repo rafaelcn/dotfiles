@@ -7,4 +7,13 @@
 ;;
 
 (use-package exotica-theme
-  :config (load-theme 'exotica t))
+  :defer t
+  :config (load-theme 'exotica t t))
+
+(use-package ample-theme
+  :ensure
+  :defer t
+  :init (progn (load-theme 'ample t t)
+			   (load-theme 'ample-flat t t)
+			   (load-theme 'ample-light t t)
+			   (enable-theme 'ample-flat)))
